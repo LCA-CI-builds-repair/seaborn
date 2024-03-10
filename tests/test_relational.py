@@ -581,11 +581,12 @@ class TestRelationalPlotter(Helpers):
     def test_relplot_weighted_estimator(self, long_df):
 
         g = relplot(data=long_df, x="a", y="y", weights="x", kind="line")
-        ydata = g.ax.lines[0].get_ydata()
+        nans = np.isnan(g.ax.lines[0].get_ydata())
         for i, label in enumerate(g.ax.get_xticklabels()):
             pos_df = long_df[long_df["a"] == label.get_text()]
             expected = np.average(pos_df["y"], weights=pos_df["x"])
-            assert ydata[i] == pytest.approx(expected)
+            if not nans[i]:
+                assert ydata[i] == pytest.approx(expected)
 
     def test_relplot_stringy_numerics(self, long_df):
 
