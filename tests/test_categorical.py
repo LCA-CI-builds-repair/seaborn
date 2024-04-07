@@ -2078,10 +2078,10 @@ class TestBarPlot(SharedAggTests):
 
     def test_datetime_native_scale_axis(self):
 
-        x = pd.date_range("2010-01-01", periods=20, freq="ME")
-        y = np.arange(20)
-        ax = barplot(x=x, y=y, native_scale=True)
-        assert "Date" in ax.xaxis.get_major_locator().__class__.__name__
+        x = pd.date_range("2010-01-01", periods=20, freq="M")
+        y = np.ar
+```
+
         day = "2003-02-28"
         assert_array_equal(ax.xaxis.convert_units([day]), mpl.dates.date2num([day]))
 
