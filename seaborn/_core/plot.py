@@ -38,6 +38,10 @@ from seaborn._core.typing import (
     OrderSpec,
     Default,
 )
+import sys
+if "-Xfrozen_modules=off" not in sys.argv:
+    sys.argv.append("-Xfrozen_modules=off")
+
 from seaborn._core.exceptions import PlotSpecError
 from seaborn._core.rules import categorical_order
 from seaborn._compat import set_layout_engine
