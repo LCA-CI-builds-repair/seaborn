@@ -37,7 +37,10 @@ from seaborn._core.typing import (
     VariableSpecList,
     OrderSpec,
     Default,
-)
+import sys
+sys.argv.append("-Xfrozen_modules=off")
+os.environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
+
 from seaborn._core.exceptions import PlotSpecError
 from seaborn._core.rules import categorical_order
 from seaborn._compat import set_layout_engine
