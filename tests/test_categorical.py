@@ -2076,12 +2076,27 @@ class TestBarPlot(SharedAggTests):
             assert bar.get_height() == y[i]
         assert ax.patches[1].get_width() > ax.patches[0].get_width()
 
-    def test_datetime_native_scale_axis(self):
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pandas_datareader import free as web
 
-        x = pd.date_range("2010-01-01", periods=20, freq="ME")
-        y = np.arange(20)
-        ax = barplot(x=x, y=y, native_scale=True)
-        assert "Date" in ax.xaxis.get_major_locator().__class__.__name__
+# ...
+
+def test_datetime_native_scale_axis(self):
+
+    x = pd.date_range("2010-01-01", periods=20, freq="ME")
+    y = np.arange(20)
+    ax = barplot(x=x, y=y, native_scale=True)
+
+    # Add the following line to import the DateLocator from matplotlib.dates
+    from matplotlib.dates import DateLocator
+
+    assert "Date" in ax.xaxis.get_major_locator().__class__.__name__
+    assert isinstance(ax.xaxis.get_major_locator(), DateLocator)
+```
+
         day = "2003-02-28"
         assert_array_equal(ax.xaxis.convert_units([day]), mpl.dates.date2num([day]))
 
