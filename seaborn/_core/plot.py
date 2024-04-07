@@ -44,6 +44,14 @@ from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
+# Addition
+from seaborn.debugger_helper import disable_frozen_modules
+
+# Edited line
+if disable_frozen_modules:
+    # Disable frozen modules
+    disable_frozen_modules(True)
+
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
