@@ -43,6 +43,15 @@ from seaborn._core.rules import categorical_order
 from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
+)
+from seaborn._core.exceptions import PlotSpecError
+from seaborn._core.rules import categorical_order
+from seaborn._compat import set_layout_engine
+from seaborn.rcmod import axes_style, plotting_context
+from seaborn.palettes import color_palette
+import matplotlib
+
+ matplotlib.use("agg")
 
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
