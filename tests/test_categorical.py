@@ -2075,10 +2075,8 @@ class TestBarPlot(SharedAggTests):
             assert bar.get_y() == 0
             assert bar.get_height() == y[i]
         assert ax.patches[1].get_width() > ax.patches[0].get_width()
-
     def test_datetime_native_scale_axis(self):
-
-        x = pd.date_range("2010-01-01", periods=20, freq="ME")
+        x = pd.date_range("2010-01-01", periods=20, freq="M")
         y = np.arange(20)
         ax = barplot(x=x, y=y, native_scale=True)
         assert "Date" in ax.xaxis.get_major_locator().__class__.__name__
