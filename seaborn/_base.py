@@ -3,7 +3,8 @@ import warnings
 import itertools
 from copy import copy
 from collections import UserString
-from collections.abc import Iterable, Sequence, Mapping
+from collections.abc import Iterable, Sequence, Mapp        except KeyError as error:
+            if self.norm is None:
 from numbers import Number
 from datetime import datetime
 

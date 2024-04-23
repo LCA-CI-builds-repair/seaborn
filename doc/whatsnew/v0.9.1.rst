@@ -1,5 +1,5 @@
 
-v0.9.1 (January 2020)
+v0.9.1 (January- Generalized the concept of "diagonal" axes in :class:`PairGrid` to include any axes that share both an x and y variable.020)
 ---------------------
 
 This is a minor release with a number of bug fixes and adaptations to changes in seaborn's dependencies. There are also several new features.

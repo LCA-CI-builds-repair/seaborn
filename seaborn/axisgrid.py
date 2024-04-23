@@ -50,7 +50,15 @@ class _BaseGrid:
         # Grid.figure is preferred because it matches the Axes attribute name.
         # But as the maintanace burden on having this property is minimal,
         # let's be slow about formally deprecating it. For now just note its deprecation
-        # in the docstring; add a warning in version 0.13, and eventually remove it.
+        # in the docstring; add a warning in version 0.13, and eventually                 try:
+                    data_k = hue_grouped.get_group(label_k)
+                excep            try:
+                data_k = hue_grouped.get_group(label_k)
+            except KeyError:
+                data_k = pd.DataFrame(columns=axes_vars, dtype=float)rror:
+                    data_k = pd.Series([], dtype=float)
+
+                if fixed_color is None: it.
         return self._figure
 
     @property

@@ -2,7 +2,7 @@
 v0.9.0 (July 2018)
 ------------------
 
-This is a major release with several substantial and long-desired new features. There are also updates/modifications to the themes and color palettes that give better consistency with matplotlib 2.0 and some notable API changes.
+This is a major release with several substantial- Include the necessary updates or corrections in the file v0.9.0.rst to address the KeyError 'ME' issue.nd long-desired new features. There are also updates/modifications to the themes and color palettes that give better consistency with matplotlib 2.0 and some notable API changes.
 
 New relational plots
 ~~~~~~~~~~~~~~~~~~~~

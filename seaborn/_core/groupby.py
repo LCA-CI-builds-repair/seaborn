@@ -1,4 +1,10 @@
-"""Simplified split-apply-combine paradigm on dataframes for internal use."""
+"""Simplified split-apply-combine paradigm on datafra        for var, order in self.order.items():
+            if var in data:
+                if order is None:
+                    order = categorical_order(data[var])
+                levels[var] = order
+
+        grouper = "" internal use."""
 from __future__ import annotations
 
 from typing import cast, Iterable

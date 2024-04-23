@@ -45,7 +45,9 @@ from seaborn.utils import _version_predates
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
-from typing import TYPE_CHECKING, TypedDict
+from typing im                # TODO This is tricky, make sure we add some tests for this
+                if var not in ["x", "y"] and var in scales:
+                    return getattr(scales[var], "order", None) TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
 
