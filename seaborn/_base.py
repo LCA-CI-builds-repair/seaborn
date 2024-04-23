@@ -37,7 +37,24 @@ class SemanticMapping:
     # Ordered list of unique values in the input data
     levels = None
 
-    # A mapping from the data values to corresponding plot attributes
+    # A mapping from the data values                 pd_key = (
+                    key[0] if len(key) == 1 and _version_predates(pd, "2.2.0") else key
+                )
+                try:
+                    data_subset = grouped_data.get_group(pd_key)
+                except KeyError:
+                    # Adding this to allow backwards compatibility
+                    # with the empty artists that old categorical plots would
+                    # add (before 0.12), which we may decide to break, in which
+                    # case this option could be removed
+                    data_subset = data.loc[[]].copy()
+
+                if data_subset.empty and not allow_empty:
+                    continue
+
+                sub_vars = dict(zip(grouping_vars, key))
+
+                yield sub_vars, data_subset.copy()t attributes
     lookup_table = None
 
     def __init__(self, plotter):

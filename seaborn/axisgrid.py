@@ -50,8 +50,28 @@ class _BaseGrid:
         # Grid.figure is preferred because it matches the Axes attribute name.
         # But as the maintanace burden on having this property is minimal,
         # let's be slow about formally deprecating it. For now just note its deprecation
-        # in the docstring; add a warning in version 0.13, and eventually remove it.
-        return self._figure
+        # in the docstring; add a warning in version 0.13, and eventuall                # Attempt to get data for this level, allowing for empty
+                try:
+                    data_k = hue_grouped.get_group(label_k)
+                except KeyError:
+                    data_k = pd.Series([], dtype=float)
+
+                if fixed_color is None:
+                    color = self.palette[k]
+                else:
+                    color = fixed_color
+
+                if self._dropna:
+                    data_k = utils.remove_na(data_k)
+
+                if str(func.__module__).startswith("seaborn"):
+                    func(x=data_k, label=label_k, color=color, **plot_kwargs)
+                else:
+                    func(data_k, label=label_k, color=color, **plot_kwargs)
+
+        self._add_axis_labels()
+
+        return selfturn self._figure
 
     @property
     def figure(self):
