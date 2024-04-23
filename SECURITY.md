@@ -1,4 +1,11 @@
-# Security Policy
+# Securi[this form](https://github.com/mwaskom/seaborn/security/advisories/new).
+
+Please provide the following information in your report:
+
+- A description of the vulnerability and its impact
+- How to reproduce the issue
+
+This project is maintained by a single maintainer on a reasonable-effort basis. As such,y
 
 If you have discovered a security vulnerability in this project, please report it
 privately. **Do not disclose it as a public issue.** This gives me time to work with you

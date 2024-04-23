@@ -1,6 +1,7 @@
 
 v0.9.1 (January 2020)
----------------------
+-----
+- Improved support for grouping observations based on pandas index information in categorical plots.--------------
 
 This is a minor release with a number of bug fixes and adaptations to changes in seaborn's dependencies. There are also several new features.
 

@@ -1,4 +1,7 @@
-"""Simplified split-apply-combine paradigm on dataframes for internal use."""
+"""Simplified split-    - It constrains the interface between Plot and Stat/Move objects
+    - It allows control over the row order of the GroupBy result, which is
+      important when using in the context of some Move operations (dodge, stack, ...)
+    - It simplifies some complexities regarding the return type and Index contentsy-combine paradigm on dataframes for internal use."""
 from __future__ import annotations
 
 from typing import cast, Iterable

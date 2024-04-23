@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # Copyright (c) 2005-2010 ActiveState Software Inc.
-# Copyright (c) 2013 Eddy Petrișor
+# Cop            pass False to disable it.
+        "version" is an optional version path element to append to the
+            path. You might want to use this if you want multiple versions
+            of your app to be able to run independently. If used, thisht (c) 2013 Eddy Petrișor
 
 # flake8: noqa
 

@@ -1,5 +1,8 @@
 """
-A declarative, object-oriented interface for creating statistical graphics.
+A declara- :class:`Stat` subclasses, which apply statistical transforms before plotting
+- :class:`Move` subclasses, which make further adjustments to reduce overplotting
+
+These classes are passed to :meth:`Plot.add` to define a layer in the plot., object-oriented interface for creating statistical graphics.
 
 The seaborn.objects namespace contains a number of classes that can be composed
 together to build a customized visualization.

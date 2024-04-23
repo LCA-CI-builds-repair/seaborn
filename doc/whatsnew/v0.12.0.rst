@@ -1,5 +1,10 @@
 v0.12.0 (September 2022)
-------------------------
+----
+- |Enhancement| It is now possible to disable the legend.
+
+The updates also harmonize behavior wi functions that have been more recently introduced. This should be relatively non-disruptive, although a few defaults will change:
+
+- |Defaults| The functions now hook into matplotlib's unit system for plotting categorical data. (Seaborn's categorical functions actually predate support for categorical data in matplotlib.) This should mostly be transparent to the user, but it may resolve a few edge cases. For example, matplotlib interactivity should work better (e.g., for showing the data value under the cursor).--------------
 
 Introduction of the objects interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
