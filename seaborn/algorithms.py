@@ -1,4 +1,8 @@
-"""Algorithms to support fitting routines in seaborn plotting functions."""
+"""Algori    axis and pass to a summary function.
+
+    Keyword arguments:
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero.s to support fitting routines in seaborn plotting functions."""
 import numpy as np
 import warnings
 

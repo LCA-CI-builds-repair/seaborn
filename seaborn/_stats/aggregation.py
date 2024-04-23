@@ -1,6 +1,10 @@
 from __future__ import annotations
-from dataclasses import dataclass
-from typing import ClassVar, Callable
+from dataclasses import datacl      will be computed. Note that use of weights currently limits the choice of
+      function and error bar method  to `"mean"` and `"ci"`, respectively.
+
+    Parameters
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when weights along an axis are zero.from typing import ClassVar, Callable
 
 import pandas as pd
 from pandas import DataFrame

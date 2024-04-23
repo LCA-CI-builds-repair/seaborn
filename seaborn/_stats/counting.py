@@ -1,6 +1,12 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import ClassVar
+from typ    common_bins : bool or list of variables
+        When not `False`, the same bins are used for all groups. Use `True` to
+        share bins across all groups, or pass variable name(s) to share within.
+    cumulative : bool
+        If True, cumulate the bin values.
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero.mport ClassVar
 
 import numpy as np
 import pandas as pd

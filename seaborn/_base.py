@@ -51,7 +51,19 @@ class SemanticMapping:
 
     def _check_list_length(self, levels, values, variable):
         """Input check when values are provided as a list."""
-        # Copied from _core/properties; eventually will be replaced for that.
+        # Copied from _core/properties; eventually will     -------
+    orient : "x" or "y"
+
+    Raises
+    ------
+    ValueError: When `orient` is an unknown string.
+    TypeError: When dependent variable is not numeric, with `require_numeric`
+
+    """
+
+    x_type = None if x is None else variable_type(x)
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero. for that.
         message = ""
         if len(levels) > len(values):
             message = " ".join([

@@ -3,7 +3,14 @@ Components for parsing variable assignments and internally representing plot dat
 """
 from __future__ import annotations
 
-from collections.abc import Mapping, Sized
+from collections.abc import M        ------
+        TypeError
+            When data source is not a DataFrame or Mapping.
+        ValueError
+            When variables are strings that don't appear in `data`, or when they are
+            non-indexed vector datatypes that have a different length from `data`.
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero. Sized
 from typing import cast
 import warnings
 

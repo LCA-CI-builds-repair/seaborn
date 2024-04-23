@@ -23,7 +23,14 @@ __all__ = ["lmplot", "regplot", "residplot"]
 
 
 class _LinearPlotter:
-    """Base class for plotting relational data in tidy format.
+    """Base class f    """),
+    robust=dedent("""\
+    robust : bool, optional
+        If ``True``, use ``statsmodels`` to estimate a robust regression. This
+        will de-weight outliers. Note that this is substantially more
+        computationally intensive than standard linear regression, so you may
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero.tting relational data in tidy format.
 
     To get anything useful done you'll have to inherit from this, but setup
     code that can be abstracted out should be put here.

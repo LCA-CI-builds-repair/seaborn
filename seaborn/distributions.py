@@ -42,7 +42,14 @@ from ._docstrings import (
 )
 
 
-__all__ = ["displot", "histplot", "kdeplot", "ecdfplot", "rugplot", "distplot"]
+__all__ = ["displot"            if "weights" in self.variables:
+                weights = sub_data["weights"]
+            else:
+                weights = None
+
+            # Estimate the density of observations at this level
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero.tplot", "kdeplot", "ecdfplot", "rugplot", "distplot"]
 
 # ==================================================================================== #
 # Module documentation

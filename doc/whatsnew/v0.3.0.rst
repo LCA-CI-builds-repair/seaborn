@@ -2,7 +2,12 @@
 v0.3.0 (March 2014)
 -------------------
 
-This is a major release from 0.2 with a number of enhancements to the plotting capabilities and styles. Highlights include :class:`FacetGrid`, ``factorplot``, :func:`jointplot`, and an overhaul to :ref:`style management <aesthetics_tutorial>`. There is also lots of new documentation, including an :ref:`example gallery <example_gallery>` and reorganized :ref:`tutorial <tutorial>`.
+This isStyle
+^^^^^
+
+- There is a new style, ``dark``, which shares most features with ``darkgrid`` but does not draw a grid by default.
+
+Fix CI to ensure tests pass and resolve `ZeroDivisionError` and `TypeError` issues.jor release from 0.2 with a number of enhancements to the plotting capabilities and styles. Highlights include :class:`FacetGrid`, ``factorplot``, :func:`jointplot`, and an overhaul to :ref:`style management <aesthetics_tutorial>`. There is also lots of new documentation, including an :ref:`example gallery <example_gallery>` and reorganized :ref:`tutorial <tutorial>`.
 
 New plotting functions
 ~~~~~~~~~~~~~~~~~~~~~~

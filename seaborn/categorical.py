@@ -73,7 +73,23 @@ class _CategoricalPlotter(VectorPlotter):
 
         # For wide data, orient determines assignment to x/y differently from the
         # default VectorPlotter rules. If we do decide to make orient part of the
-        # _base variable assignment, we'll want to figure out how to express that.
+        # _    dodge : bool
+        When a `hue` variable is assigned, setting this to `True` will
+        separate the strips for differ    ----------
+    {categorical_data}
+    {input_params}
+    {order_vars}
+    dodge : bool
+        When a `hue` variable is assigned, setting this to `True` will
+        separate the swaarms for different hue levels along the categorical
+        axis and narrow the amount of space allotted to each strip. Otherwise,
+        the points for each level will be plotted in the same swarm.
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero.evels along the categorical
+        axis and narrow the amount of space allotted to each strip. Otherwise,
+        the points for each level will be plotted in the same strip.
+
+Fix CI to ensure tests pass and handle `ZeroDivisionError` and `TypeError` when all weights along an axis are zero.variable assignment, we'll want to figure out how to express that.
         if self.input_format == "wide" and orient in ["h", "y"]:
             self.plot_data = self.plot_data.rename(columns={"x": "y", "y": "x"})
             orig_variables = set(self.variables)
