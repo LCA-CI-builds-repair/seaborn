@@ -2,9 +2,17 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
-import matplotlib as mpl
+import matplotlib a        scales = {"linewidth        df = pd.DataFrame({"alpha": list(values.keys())})
 
-import pytest
+        # Do this in two steps for mpl 3.2 compat
+        expected = mpl.colors.to_rgba_array([c] * len(df))
+        expected[:, 3] = list(values.values())
+
+        assert_array_equal(resolve_color(m, df, "", scales), expected)      assert m._resolve({"linewidth": "c"}, "linewidth", scales) == 3
+
+        df = pd.DataFrame({"linewidth": ["a", "b", "c"]})
+        expected = np.array([1, 2, 3], float)
+        assert_array_equal(m._resolve(df, "linewidth", scales), expected)import pytest
 from numpy.testing import assert_array_equal
 
 from seaborn._marks.base import Mark, Mappable, resolve_color
