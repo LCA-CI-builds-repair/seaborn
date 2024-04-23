@@ -1,7 +1,30 @@
 from dataclasses import dataclass
 
-import numpy as np
-import pandas as pd
+im    def test_value(self):
+
+        val = 3
+        m = self.mark(linewidth=val)
+        assert m._resolve({}, "linewidth") == val
+
+        df = pd.DataFrame(index=pd.RangeIndex(10))
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val))
+
+    def test_default(self):
+
+        val = 3
+        m = self.mark(linewidth=Mappable(val))
+        assert m._resolve({}, "linewidth") == val
+
+        df = pd.DataFrame(index=pd.RangeIndex(10))
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val))
+
+    def test_rcparam(self):
+
+        param = "lines.linewidth"
+        val = mpl.rcParams[param]
+
+        m = self.mark(linewidth=Mappable(rc=param))
+        assert m._resolve({}, "linewidth") == vals pd
 import matplotlib as mpl
 
 import pytest
