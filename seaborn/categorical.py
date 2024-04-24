@@ -45,7 +45,15 @@ __all__ = [
 ]
 
 
-class _CategoricalPlotter(VectorPlotter):
+                {
+                    "transform": trans,
+                    **inner_kws,
+                    "markeredgecolor": "w",
+                    "markerfacecolor": "w",
+                    "color": linecolor,  # simplify tests
+                    "linewidth": 1.5,
+                    "markersize": 5,
+                }_CategoricalPlotter(VectorPlotter):
 
     wide_structure = {"x": "@columns", "y": "@values", "hue": "@columns"}
     flat_structure = {"y": "@values"}

@@ -1,9 +1,20 @@
 """Algorithms to support fitting routines in seaborn plotting functions."""
 import numpy as np
-import warnings
-
-
-def bootstrap(*args, **kwargs):
+import warningdef bootstrap_sample(func, n_boot, n_units, *args, **func_kwargs):
+    boot_dist = []
+    
+    for _ in range(int(n_boot)):
+        resampler = np.random.choice(n_units, n_units, replace=True)
+        sample = [[a[i] for i in resampler] for a in args]
+        
+        lengths = [len(s) for s in sample[0]]
+        resampler = [np.random.choice(n, n, replace=True) for n in lengths]
+        sample = [[c.take(r, axis=0) for c, r in zip(a, resampler)] for a in sample]
+        sample = [np.concatenate(s) for s in sample]
+        
+        boot_dist.append(func(*sample, **func_kwargs))
+    
+    return np.array(boot_dist)tstrap(*args, **kwargs):
     """Resample one or more arrays with replacement and store aggregate values.
 
     Positional arguments are a sequence of arrays to bootstrap along the first

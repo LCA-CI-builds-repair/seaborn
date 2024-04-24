@@ -1,4 +1,35 @@
-from dataclasses import dataclass
+fimport numpy as np
+import pandas as    def test_mappable_errors(self):
+        with pytest.raises(AssertionError):
+            Mappable(rc="bogus.parameter")
+        
+        with pytest.raises(AssertionError):
+            Mappable(depend="nonexistent_feature")
+
+    def test_value_resolution(self):
+        val = 3
+        m = self.mark(linewidth=val)
+        assert m._resolve({}, "linewidth") == val
+
+        df = pd.DataFrame(index=pd.RangeIndex(10))
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val))
+
+    def test_default_resolution(self):
+        val = 3
+        m = self.mark(linewidth=Mappable(val))
+        assert m._resolve({}, "linewidth") == val
+
+        df = pd.DataFrame(index=pd.RangeIndex(10))
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val))
+
+    def test_rcparam_resolution(self):
+        param = "lines.linewidth"
+        val = mpl.rcParams[param]
+
+        m = self.mark(linewidth=Mappable(rc=param))import pytest
+from numpy.testing import assert_array_equal
+
+from seaborn._marks.base import Mark, Mappable, resolve_colorlasses import dataclass
 
 import numpy as np
 import pandas as pd

@@ -2,9 +2,39 @@
 import copy
 from textwrap import dedent
 import warnings
-import numpy as np
-import pandas as pd
-import matplotlib as mpl
+import numpy as     def scatter_data(self):
+        """Data where each observation is a point."""
+        x_j = self.x_jitter
+        if x_j is None:
+            x = self.x
+        else:
+            x = self.x + np.random.uniform(-x_j, x_j, len(self.x))
+
+        y_j = self.y_jitter
+        if y_j is None:
+            y = self.y
+        else:
+            y = self.y + np.random.uniform(-y_j, y_j, len(self.y))
+
+        return x, y
+
+    @property
+    def estimate_data(self):
+        """Data with a point estimate and CI for each discrete x value."""
+        x, y = self.x_discrete, self.y
+        vals = sorted(np.unique(x))
+        points, cis = [], []
+
+        for val in vals:
+            _y = y[x == val]
+            est = self.x_estimator(_y)
+            points.append(est)
+
+            # Calculate confidence interval
+            ci = self.confidence_interval(_y)
+            cis.append(ci)
+
+        return points, cis matplotlib as mpl
 import matplotlib.pyplot as plt
 
 try:

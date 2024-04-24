@@ -7,7 +7,17 @@ from numpy.testing import assert_array_equal, assert_array_almost_equal
 
 from seaborn._core.plot import Plot
 from seaborn._core.moves import Dodge
-from seaborn._marks.line import Dash, Line, Path, Lines, Paths, Range
+from seaborn._marks.line import Daimport unittest
+
+class TestLine(unittest.TestCase):
+
+    def test_lists_equality(self):
+        x = [1, 1, 2, 2, 2]
+        y = [1, 2, 3, 4, 5]
+        self.assertEqual(x, y)
+
+if __name__ == '__main__':
+    unittest.main() Line, Path, Lines, Paths, Range
 
 
 class TestPath:

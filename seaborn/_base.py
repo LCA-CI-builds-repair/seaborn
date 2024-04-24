@@ -37,8 +37,24 @@ class SemanticMapping:
     # Ordered list of unique values in the input data
     levels = None
 
-    # A mapping from the data values to corresponding plot attributes
-    lookup_table = None
+    # A mapping from the data values to corresponding pl        else:
+            yield {}, data.copy()
+
+    @property
+    def comp_data(self):
+        """Dataframe with numeric x and y, after unit conversion and log scaling."""
+        if not hasattr(self, "ax"):
+            raise AttributeError("No Axes attached to plotter")
+
+        if not hasattr(self, "_comp_data"):
+            comp_data = (
+                self.plot_data
+                .copy(deep=False)
+                .drop(["x", "y"], axis=1, errors="ignore")
+            )
+
+            for var in "yx":
+                if var not in self.variables:table = None
 
     def __init__(self, plotter):
 

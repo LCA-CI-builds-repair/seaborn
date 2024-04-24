@@ -3,7 +3,18 @@ from matplotlib.colors import to_rgba, to_rgba_array
 import pytest
 from numpy.testing import assert_array_equal
 
-from seaborn.palettes import color_palette
+from seaborn.palettes imporimport unittest
+
+class TestDot(unittest.TestCase):
+
+    def test_dot_plot(self):
+        x = [1, 2, 3]
+        y = [4, 5, 2]
+        s = 3
+        plot = Plot(x=x, y=y).add(Dots(pointsize=s)).plot()
+
+if __name__ == '__main__':
+    unittest.main()or_palette
 from seaborn._core.plot import Plot
 from seaborn._marks.dot import Dot, Dots
 
