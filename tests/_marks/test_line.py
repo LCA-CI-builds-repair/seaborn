@@ -7,12 +7,42 @@ from numpy.testing import assert_array_equal, assert_array_almost_equal
 
 from seaborn._core.plot import Plot
 from seaborn._core.moves import Dodge
-from seaborn._marks.line import Dash, Line, Path, Lines, Paths, Range
+from seaborn._marks.line import Dash, Line, Path, Lines, Pathsimport numpy as np
+from plot import Range, Plot, Dash
+from utils import same_color, assert_array_almost_equal, assert_array_equal
 
+class TestLine:
 
-class TestPath:
+    def test_range_data(self):
+        x = [1, 2]
+        ymin = [1, 4]
+        ymax = [2, 3]
+
+        m = Range(color="0.6", linewidth=4)
+        p = Plot(x=x, ymin=ymin, ymax=ymax).add(m).plot()
+        lines, = p._figure.axes[0].collections
+
+        for i, path in enumerate(lines.get_paths()):
+            assert same_color(lines.get_colors()[i], m.color)
+            assert lines.get_linewidths()[i] == m.linewidth
+
+class TestDash:
 
     def test_xy_data(self):
+        x = [0, 0, 1, 2]
+        y = [1, 2, 3, 4]
+
+        p = Plot(x=x, y=y).add(Dash()).plot()
+        lines, = p._figure.axes[0].collections
+
+        for i, path in enumerate(lines.get_paths()):
+            verts = path.vertices.T
+            assert_array_almost_equal(verts[0], [x[i] - .4, x[i] + .4])
+            assert_array_equal(verts[1], [y[i], y[i]])
+
+    def test_xy_data_grouped():
+        # Add test implementation for grouped data
+        passdef test_xy_data(self):
 
         x = [1, 5, 3, np.nan, 2]
         y = [1, 4, 2, 5, 3]

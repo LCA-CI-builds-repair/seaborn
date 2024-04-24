@@ -1,6 +1,67 @@
-from dataclasses import dataclass
+fimport numpy as np
+import pandas as pd
+import matplotlib as mpl
 
-import numpy as np
+im        assert m._resolve({}, "linewidth") == val
+
+        df = pd.DataFrame(index=pd.RangeIndex(10))
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val))
+
+    def test_depends(self):
+
+        val = 2
+        df = pd.DataFrame(index=pd.RangeIndex(10))
+
+        m = self.mark(pointsize=Mappable(val), linewidth=Mappable(depend="pointsize"))
+        assert m._resolve({}, "linewidth") == val
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val))
+
+        m = self.mark(pointsize=val * 2, linewidth=Mappable(depend="pointsize"))
+        assert m._resolve({}, "linewidth") == val * 2
+        assert_array_equal(m._resolve(df, "linewidth"), np.full(len(df), val * 2))
+
+    def test_mapped(self):
+
+        values = {"a": 1, "b": 2, "c": 3}
+
+        def f(x):
+            return np.array([values[x_i] for x_i in x])
+
+        m = self.mark(linewidth=Mappable(2))
+        scales = {"linewidth": f}
+
+        # Add assertions and implementations for mapping valuesing import assert_array_equal
+
+from seaborn._marks.base import Mark, Mappable, resolve_color
+
+
+class TestMappable:
+
+    def mark(self, **features):
+
+        @dataclass
+        class MockMark(Mark):
+            linewidth: float = Mappable(rc="lines.linewidth")
+            pointsize: float = Mappable(4)
+            color: str = Mappable("C0")
+            fillcolor: str = Mappable(depend="color")
+            alpha: float = Mappable(1)
+            fillalpha: float = Mappable(depend="alpha")
+
+        m = MockMark(**features)
+        return m
+
+    def test_repr(self):
+
+        assert str(Mappable(.5)) == "<0.5>"
+        assert str(Mappable("CO")) == "<'CO'>"
+        assert str(Mappable(rc="lines.linewidth")) == "<rc:lines.linewidth>"
+        assert str(Mappable(depend="color")) == "<depend:color>"
+        assert str(Mappable(auto=True)) == "<auto>"
+
+    def test_input_checks(self):
+        # Add input validation checks for various scenarios
+        passport numpy as np
 import pandas as pd
 import matplotlib as mpl
 

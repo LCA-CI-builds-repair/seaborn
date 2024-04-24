@@ -1,6 +1,49 @@
 
-import numpy as np
-from matplotlib.colors import to_rgba
+ifrom matplotlib.colors import to_rgba
+from matplotlib.text import Text as MPLText
+
+from numpy.testing import assert_array_almost_equal
+from seaborn._core.plot import Plot
+from seaborn._marks.text import Text
+
+class TestText:
+
+    def get_texts(self, ax):
+        if ax.texts:
+            return list(ax.texts)
+        else:
+            # Compatibility with matplotlib < 3.5 (I think)
+            return [a for a in ax.artists if isinstance(a, MPLText)]
+
+    def test_simple(self):
+        x = y = [1, 2, 3]
+        s = list("abc")
+
+        p = Plot(x, y, text=s).add(Text()).plot()
+        ax = p._figure.axes[0]
+        for i, text in enumerate(self.get_texts(ax)):
+            x_, y_ = text.get_position()
+            assert x_ == x[i]
+            assert y_ == y[i]
+            assert text.get_text() == s[i]
+            assert text.get_horizontalalignment() == "center"
+            assert text.get_verticalalignment() == "center_baseline"
+
+    def test_set_properties(self):
+        x = y = [1, 2, 3]
+        s = list("abc")
+        text_props = {
+            "color": "red",
+            "fontsize": 12,
+            "fontweight": "bold"
+        }
+
+        p = Plot(x, y, text=s, text_props=text_props).add(Text()).plot()
+        ax = p._figure.axes[0]
+        for i, text in enumerate(self.get_texts(ax)):
+            assert text.get_color() == "red"
+            assert text.get_fontsize() == 12
+            assert text.get_fontweight() == "bold"colors import to_rgba
 from matplotlib.text import Text as MPLText
 
 from numpy.testing import assert_array_almost_equal

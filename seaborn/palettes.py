@@ -6,7 +6,13 @@ import matplotlib as mpl
 
 from .external import husl
 
-from .utils import desaturate, get_color_cycle
+from .utils imp    matplotlib color cycle.
+
+    This function returns a list of colors defining a color palette. It can be used to set the color palette for plots created with Seaborn.
+
+    This function can also be used in a ``with`` statement to temporarily set the color palette for a plot or set of plots.
+
+    See the :ref:`tutorial <palette_tutorial>` for more information.saturate, get_color_cycle
 from .colors import xkcd_rgb, crayons
 from ._compat import get_colormap
 
@@ -14,7 +20,19 @@ from ._compat import get_colormap
 __all__ = ["color_palette", "hls_palette", "husl_palette", "mpl_palette",
            "dark_palette", "light_palette", "diverging_palette",
            "blend_palette", "xkcd_palette", "crayon_palette",
-           "cubehelix_palette", "set_color_codes"]
+      """Set the color palette source for matplotlib color shorthands.
+
+    Calling this function will change how shorthand codes like "b" or "g"
+    are interpreted by matplotlib in subsequent plots.
+
+    Parameters
+    ----------
+    palette : str
+        Named seaborn palette to use as the source of colors. Options include: "deep", "muted", "pastel", "dark", "bright", "colorblind".
+
+    See Also
+    --------
+    set_palette : Set the color palette for seaborn plots.ehelix_palette", "set_color_codes"]
 
 
 SEABORN_PALETTES = dict(

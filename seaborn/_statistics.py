@@ -9,8 +9,19 @@ The classes should behave roughly in the style of scikit-learn.
 - Each class should implement a default transformation that is exposed through
   __call__. These are currently written for vector arguments, but I think
   consuming a whole `plot_data` DataFrame and return it with transformed
-  variables would make more sense.
-- Some class have data-dependent preprocessing that should be cached and used
+  variables would ma        if estimator != "mean":
+            # Weighted estimators like median are not currently supported
+            raise ValueError(f"Weighted estimator must be 'mean', not {estimator!r}.")
+        self.estimator = estimator
+
+        method, level = _validate_errorbar_arg(errorbar)
+        if method is not None and method != "ci":
+            # Only (bootstrap) confidence intervals are supported for error bars
+            raise ValueError(f"Error bar method must be 'ci', not {method!r}.")
+        self.error_method = method
+        self.error_level = level
+
+        self.boot_kws = boot_kws Some class have data-dependent preprocessing that should be cached and used
   multiple times (think defining histogram bins off all data and then counting
   observations within each bin multiple times per data subsets). These currently
   have unique names, but it would be good to have a common name. Not quite

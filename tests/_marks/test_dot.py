@@ -3,7 +3,41 @@ from matplotlib.colors import to_rgba, to_rgba_array
 import pytest
 from numpy.testing import assert_array_equal
 
-from seaborn.palettes import color_palette
+ffrom plot import Plot
+from marks import Dots
+
+class TestDot:
+
+    def test_dots(self):
+        x = [1, 2, 3]
+        y = [4, 5, 2]
+        c = ["a", "b", "a"]
+        p = Plot(x=x, y=y, color=c).add(Dots()).plot()
+        ax = p._figure.axes[0]
+        points, = ax.collections
+        C0, C1, *_ = p._theme["axes.prop_cycle"].by_key()["color"]
+        self.check_offsets(points, x, y)
+        self.check_colors("face", points, [C0, C1, C0], .2)
+        self.check_colors("edge", points, [C0, C1, C0], 1)
+
+    def test_fill(self):
+        x = [1, 2, 3]
+        y = [4, 5, 2]
+        c = ["a", "b", "a"]
+        p = Plot(x=x, y=y, color=c).add(Dots(fill=False)).plot()
+        ax = p._figure.axes[0]
+        points, = ax.collections
+        C0, C1, *_ = p._theme["axes.prop_cycle"].by_key()["color"]
+        self.check_offsets(points, x, y)
+        self.check_colors("face", points, [C0, C1, C0], 0)
+        self.check_colors("edge", points, [C0, C1, C0], 1)
+
+    def test_pointsize(self):
+        x = [1, 2, 3]
+        y = [4, 5, 2]
+        s = 3
+        p = Plot(x=x, y=y).add(Dots(pointsize=s)).plot()
+        # Add assertions for point sizeor_palette
 from seaborn._core.plot import Plot
 from seaborn._marks.dot import Dot, Dots
 

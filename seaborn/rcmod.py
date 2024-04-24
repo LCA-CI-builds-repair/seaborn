@@ -21,9 +21,21 @@ _style_keys = [
     "figure.facecolor",
 
     "grid.color",
-    "grid.linestyle",
+    "grid.linesty    --------
+    color_palette : Build a color palette or set the color cycle temporarily
+                    in a ``with`` statement.
+    set_context : Set parameters to scale plot elements
+    set_style : Set the default parameters for figure style
 
-    "text.color",
+    """
+    colors = palettes.color_palette(palette=palette, n_colors=n_colors, desat=desat)
+    cyl = cycler('color', colors)
+    mpl.rcParams['axes.prop_cycle'] = cyl
+    if color_codes:
+        try:
+            palettes.set_color_codes(palette)
+        except (ValueError, TypeError):
+            pass.color",
 
     "xtick.color",
     "ytick.color",
