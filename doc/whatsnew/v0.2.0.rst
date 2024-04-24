@@ -2,8 +2,12 @@
 v0.2.0 (December 2013)
 ----------------------
 
-This is a major release from 0.1 with a number of API changes, enhancements,
-and bug fixes.
+This is a major release from 0.1 with a number of API changes, enhancements,### New Features
+
+- **Dark Mode**
+  - Added Dark Mode feature for better user experience.
+  - Users can enable Dark Mode by going to Settings and selecting the Dark Mode option.
+  - To disable Dark Mode, simply uncheck the Dark Mode option in the Settings.and bug fixes.
 
 Highlights include an overhaul of timeseries plotting to work intelligently
 with dataframes, the new function ``interactplot()`` for visualizing continuous

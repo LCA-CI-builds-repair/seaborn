@@ -15,7 +15,8 @@ from ._compat import share_axis, get_legend_handles
 from . import utils
 from .utils import (
     adjust_legend_subtitles,
-    set_hls_values,
+    set            if gridspec_kws:
+                warnings.warn("`gridspec_kws` parameter is ignored when using `col_wrap` to manage subplot arrangement.")ls_values,
     _check_argument,
     _draw_figure,
     _disable_autolayout

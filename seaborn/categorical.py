@@ -18,7 +18,8 @@ from seaborn._stats.density import KDE
 from seaborn import utils
 from seaborn.utils import (
     desaturate,
-    _check_argument,
+    _                    # Check if the orientation is categorical to determine if a fixed scale should be used
+                    fixed_scale = self.var_types[self.orient] == "categorical"heck_argument,
     _draw_figure,
     _default_color,
     _get_patch_legend_artist,

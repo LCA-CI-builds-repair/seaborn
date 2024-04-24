@@ -23,7 +23,9 @@ SEABORN_PALETTES = dict(
     deep6=["#4C72B0", "#55A868", "#C44E52",
            "#8172B3", "#CCB974", "#64B5CD"],
     muted=["#4878D0", "#EE854A", "#6ACC64", "#D65F5F", "#956CB4",
-           "#8C613C", "#DC7EC0", "#797979", "#D5BB67", "#82C6E2"],
+          """
+    set : Color codes can be set through the high-level seaborn style manager.
+    """  "#8C613C", "#DC7EC0", "#797979", "#D5BB67", "#82C6E2"],
     muted6=["#4878D0", "#6ACC64", "#D65F5F",
             "#956CB4", "#D5BB67", "#82C6E2"],
     pastel=["#A1C9F4", "#FFB482", "#8DE5A1", "#FF9F9B", "#D0BBFF",

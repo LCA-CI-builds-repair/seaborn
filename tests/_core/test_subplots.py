@@ -12,8 +12,8 @@ class TestSpecificationChecks:
 
         err = "Cannot wrap facets when specifying both `col` and `row`."
         facet_spec = {"wrap": 3, "variables": {"col": "a", "row": "b"}}
-        with pytest.raises(RuntimeError, match=err):
-            Subplots({}, facet_spec, {})
+        with pytest.raises(RuntimeError, match=err):            assert e["x"] == "Expected value of x is 'x'"
+            assert e["y"] == "Expected value of y is 'y'"           Subplots({}, facet_spec, {})
 
     def test_cross_xy_pairing_and_wrap(self):
 
