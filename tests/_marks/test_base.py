@@ -2,10 +2,23 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+import matplotlib aimport pandas as pd
+import numpy as np
 import matplotlib as mpl
-
-import pytest
 from numpy.testing import assert_array_equal
+
+class TestBase:
+    # Existing code remains unchanged for brevity
+
+    def test_color_mapped_alpha(self):
+
+        c = "r"
+        values = {"a": 0.2, "b": 0.5, "c": 0.8}
+
+        m = self.mark(color=c, alpha=Mappable(1))
+        scales = {"alpha": lambda s: np.array([values[s_i] for s_i in s])}
+
+        assert resolve_color(m, {"alpha": "b"}, "", scales) == mpl.colors.to_rgba(c, 0.5)mpy.testing import assert_array_equal
 
 from seaborn._marks.base import Mark, Mappable, resolve_color
 

@@ -3,7 +3,71 @@ import warnings
 import itertools
 from copy import copy
 from collections import UserString
-from collections.abc import Iterable, Sequence, Mapping
+from collections.abc import I            else:
+                levels, lookup_table = self.categorical_mapping(
+                    list(data), palette, order,
+                )
+                cmap = None  # Implement colormap functionality    def _lookup_single(self, key):
+
+        try:
+            value = self.lookup_table[key]
+        except KeyError:
+            normed = self.norm(key)
+            if np.ma.is_masked(normed):
+                normed = np.nan
+            value = self.size_range[0] + normed * np.ptp(self.size_range)
+        return value
+
+    def categorical_mapping(self, data, sizes, order):
+
+        levels = categorical_order(data, order)
+
+        if isinstance(sizes, dict):
+
+            # Dict inputs map existing data values to the size attribute
+            missing = set(levels) - set(siz                pd_key = (
+                    key[0] if len(key) == 1 and _version_predates(pd, "2.2.0") else key
+                )
+                try:
+                    data_subset = grouped_data.get_group(pd_key)
+                except KeyError:
+                    # Handle KeyError by providing a default empty data subset
+                    data_subset = data.loc[[]]
+
+                if data_subset.empty and not allow_empty:
+                    # Skip iteration if data_subset is empty and allow_empty is False
+                    continue
+
+                sub_vars = dict(zip(grouping_vars, key))
+
+                # Yield sub_vars and a copy of data_subset
+                yield sub_vars, data_subset.copy()ny(missing):
+                err = f"Missing sizes for the following levels: {missing}"
+                raise ValueError(err)
+            lookup_table = sizes.copy()
+
+        elif isinstance(sizes, list):
+            # Handle the case when sizes is a list to populate lookup_table
+            if len(sizes) != len(levels):
+                raise ValueError("Number of sizes should match number of levels")
+            lookup_table = dict(zip(levels, sizes))
+ = None  # Implement normalization functionality here
+
+            self.saturation = saturation
+            self.map_type = map_type
+            self.lookup_table = lookup_table
+            self.palette = palette
+            self.levels = levels
+            self.norm = norm
+            self.cmap = cmap
+
+    def _lookup_single(self, key):
+        """Get the color for a single value, using colormap to interpolate."""
+        try:
+            # Use a value that's in the original data vector
+            value = self.lookup_table[key]
+        except KeyError:
+            # Handle the KeyError exception appropriatelyng
 from numbers import Number
 from datetime import datetime
 

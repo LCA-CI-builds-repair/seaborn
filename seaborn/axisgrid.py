@@ -50,12 +50,107 @@ class _BaseGrid:
         # Grid.figure is preferred because it matches the Axes attribute name.
         # But as the maintanace burden on having this property is minimal,
         # let's be slow about formally deprecating it. For now just note its deprecation
-        # in the docstring; add a warning in version 0.13, and eventually remove it.
-        return self._figure
+        # in the docstring; add a warning in version 0.13, and eventuallimport pandas as pd
+from seaborn import utils
+import matplotlib.pyplot as plt
 
-    @property
-    def figure(self):
-        """Access the :class:`matplotlib.figure.Figure` object underlying the grid."""
+class AxisGrid:
+    # Existing code remains unchanged for brevity
+    
+    def _map_bivariate(self, func, indices, **kwargs):
+        """Draw a bivariate plot on the indicated axes."""
+        from seaborn.distributions import histplot, kdeplot
+        if func is histplot or func is kdeplot:
+            self._extract_legend_handles = True
+
+        kws = kwargs.copy()  # Use copy as we insert other kwargs
+        for i, j in indices:
+            x_var = self.x_vars[j]
+            y_var = self.y_vars[i]
+            ax = self.axes[i, j]
+            if ax is None:  # i.e. we are in corner mode
+                continue
+            self._plot_bivariate(x_var, y_var, ax, func, **kws)
+        self._add_axis_labels()
+
+        if "hue" in signature(func).parameters:
+            self.hue_names = list(self._legend_data)
+
+    def _plot_bivariate(self, x_var, y_var, ax, func, **kwargs):
+        """Draw a bivariate plot on the specified axes."""
+        if "hue" not in signature(func).parameters:
+            self._plot_bivariate_iter_hue(x_var, y_var, ax, func, **kwargs)
+            return
+
+        kwargs = kwargs.copy()
+        if str(func.__module__).startswith("seaborn"):
+            kwargs["ax"] = ax
+        else:
+            plt.sca(ax)
+
+        if x_var == y_var:
+            axes_vars = [x_var]
+        else:
+            axes_vars = [x_var, y_var]
+
+        data = self.data[axes_vars]
+        if self._dropna:
+            data = data.dropna()
+
+        x = data[x_var]
+        y = data[y_var]
+        if self._hue_var is not None:
+            hue = data.get(self._hue_var)
+
+        if "hue" not in kwargs:
+            kwargs.update({
+                "hue": hue, "hue_order": self._hue_order, "palette": self._orig_palette,
+            })
+        func(x=x, y=y, **kwargs)
+
+        self._update_legend_data(ax)
+
+    def _plot_bivariate_iter_hue(self, x_var, y_var, ax, func, **kwargs):
+        """Draw a bivariate plot while iterating over hue subsets."""
+        kwargs = kwargs.copy()
+        if str(func.__module__).startswith("seaborn"):
+            kwargs["ax"] = ax
+        else:
+            plt.sca(ax)
+
+        if x_var == y_var:
+            axes_vars = [x_var]
+        else:
+            axes_vars = [x_var, y_var]
+
+        hue_grouped = self.data.groupby(self.hue_vals, observed=True)
+        for k, label_k in enumerate(self._hue_order):
+
+            kws = kwargs.copy()
+
+            try:
+                data_k = hue_grouped.get_group(label_k)
+            except KeyError:
+                data_k = pd.DataFrame(columns=axes_vars, dtype=float)
+
+            if self._dropna:
+                data_k = data_k[axes_vars].dropna()
+
+            x = data_k[x_var]
+            y = data_k[y_var]
+
+            for kw, val_list in self.hue_kws.items():
+                kws[kw] = val_list[k]
+            kws.setdefault("color", self.palette[k])
+            if self._hue_var is not None:
+                kws["label"] = label_k
+
+            if str(func.__module__).startswith("seaborn"):
+                func(x=x, y=y, **kws)
+            else:
+                func(x, y, **kws)
+
+        self._update_legend_data(ax)gure` object underlying the grid."""
         return self._figure
 
     def apply(self, func, *args, **kwargs):

@@ -1,7 +1,23 @@
 
 import numpy as np
 from matplotlib.colors import to_rgba
-from matplotlib.text import Text as MPLText
+from matplotlib.text impo        x = y = [1, 2, 3]
+        s = list("abc")
+        fs = [5, 8, 12]
+        p = Plot(x=x, y=y, text=s, fontsize=fs).add(Text()).plot()
+        ax = p._figure.axes[0]
+        for i, text in enumerate(self.get_texts(ax)):
+            assert text.get_fontsize() == fs[i]
+
+    def test_offset_centered(self):
+
+        x = y = [1, 2, 3]
+        s = list("abc")
+        p = Plot(x=x, y=y, text=s).add(Text()).plot()
+        ax = p._figure.axes[0]
+        ax_trans = ax.transData.get_matrix()
+        for text in self.get_texts(ax):
+            assert_array_almost_equal(text.get_transform().get_matrix(), ax_trans)
 
 from numpy.testing import assert_array_almost_equal
 

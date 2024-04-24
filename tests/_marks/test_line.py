@@ -15,7 +15,29 @@ class TestPath:
     def test_xy_data(self):
 
         x = [1, 5, 3, np.nan, 2]
-        y = [1, 4, 2, 5, 3]
+import numpy as np
+from plot_module import Plot, Dash, Dodge
+from numpy.testing import assert_array_almost_equal, assert_array_equal
+
+x = [0, 1]
+y = [1, 2]
+group = ["a", "b"]
+
+p = Plot(x=x, y=y, group=group)
+p.add(Dash())
+p.add(Dodge())
+p.plot()
+
+lines, = p._figure.axes[0].collections
+
+paths = lines.get_paths()
+
+v0 = paths[0].vertices.T
+assert_array_almost_equal(v0[0], [-0.4, 0])
+assert_array_equal(v0[1], [y[0], y[0]])
+
+v1 = paths[1].vertices.T
+assert_array_almost_equal(v1[0], [1, 1.4])4, 2, 5, 3]
         g = [1, 2, 1, 1, 2]
         p = Plot(x=x, y=y, group=g).add(Path()).plot()
         line1, line2 = p._figure.axes[0].get_lines()
