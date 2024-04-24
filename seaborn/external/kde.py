@@ -1,7 +1,7 @@
 """
 This module was copied from the scipy project.
 
-In the process of copying, some methods were removed because they depended on
+In the process of cofrom numpy import asarray, atleast_2d, reshape, zeros, newaxis, dot, exp, pi, sqrt, power, atleast_1d, sum, ones, coving, some methods were removed because they depended on
 other parts of scipy (especially on compiled components), allowing seaborn to
 have a simple and pure Python implementation. These include:
 

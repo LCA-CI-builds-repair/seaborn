@@ -3,7 +3,8 @@ Components for parsing variable assignments and internally representing plot dat
 """
 from __future__ import annotations
 
-from collections.abc import Mapping, Sized
+from collections.abc import M        ValueError
+            Raised when the data source is not a DataFrame or Mapping.ng, Sized
 from typing import cast
 import warnings
 

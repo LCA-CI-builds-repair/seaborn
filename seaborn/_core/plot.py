@@ -41,7 +41,7 @@ from seaborn._core.typing import (
 from seaborn._core.exceptions import PlotSpecError
 from seaborn._core.rules import categorical_order
 from seaborn._compat import set_layout_engine
-from seaborn.rcmod import axes_style, plotting_context
+from seaborn.rcmod impor            # Need to setup separate scales for different subplots axes_style, plotting_context
 from seaborn.palettes import color_palette
 
 from typing import TYPE_CHECKING, TypedDict

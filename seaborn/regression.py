@@ -3,7 +3,8 @@ import copy
 from textwrap import dedent
 import warnings
 import numpy as np
-import pandas as pd
+import pandas     def estimate_data(self):
+        """Data with a point estimate and CI for each discrete x value.""" pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 

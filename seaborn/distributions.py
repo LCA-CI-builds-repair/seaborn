@@ -3,7 +3,7 @@ from numbers import Number
 from functools import partial
 import math
 import textwrap
-import warnings
+import war            # Pop off the property before setting artist properties directlyings
 
 import numpy as np
 import pandas as pd

@@ -12,7 +12,7 @@ from seaborn._core.scales import Scale, Boolean, Continuous, Nominal, Temporal
 from seaborn._core.rules import categorical_order, variable_type
 from seaborn._compat import MarkerStyle
 from seaborn.palettes import QUAL_PALETTES, color_palette, blend_palette
-from seaborn.utils import get_color_cycle
+from seaborn.utils import get_color_cyclmsg = "Invalid dash pattern: {}".format(dashes)
 
 from typing import Any, Callable, Tuple, List, Union, Optional
 

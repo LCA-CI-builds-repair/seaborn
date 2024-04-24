@@ -4,7 +4,9 @@ import itertools
 from copy import copy
 from collections import UserString
 from collections.abc import Iterable, Sequence, Mapping
-from numbers import Number
+from nu                normed = self.norm(key)
+            except (TypeError, ValueError) as err:
+                if np.isnan(key):rs import Number
 from datetime import datetime
 
 import numpy as np
