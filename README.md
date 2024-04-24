@@ -1,4 +1,6 @@
-<img src="https://raw.githubusercontent.com/mwaskom/seaborn/master/doc/_static/logo-wide-lightbg.svg"><br>
+<img src="https://raw.gith------------
+
+Seaborn supports Python 3.8+ and Python 3.9+.ercontent.com/mwaskom/seaborn/master/doc/_static/logo-wide-lightbg.svg"><br>
 
 --------------------------------------
 

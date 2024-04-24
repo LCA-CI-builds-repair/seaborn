@@ -6,7 +6,12 @@ __version__ = "2.1.0"
 
 m = [
     [3.2406, -1.5372, -0.4986],
-    [-0.9689, 1.8758, 0.0415],
+    [-0.9689, 1.875    # Update chroma if test value is less than current chroma
+        # Round the calculated value to the nearest integer
+        ret.append(int(round(ch * 255 + 0.001)))  if test < current_chroma:
+        current_chroma = test
+        result = hue_rad
+    return result.0415],
     [0.0557, -0.2040, 1.0570]
 ]
 

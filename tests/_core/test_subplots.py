@@ -11,7 +11,16 @@ class TestSpecificationChecks:
     def test_both_facets_and_wrap(self):
 
         err = "Cannot wrap facets when specifying both `col` and `row`."
-        facet_spec = {"wrap": 3, "variables": {"col": "a", "row": "b"}}
+        facet_spec = {"wrap": 3, "var                  variab            # C                      "col": ["left", "right", "top", "bottom"],
+                "row": ["top", "bottom", "left", "right"],    # Check if the current dimension value matches the order at index i
+            assert element[dimension] == order[i]
+            for axis in "xy":ck if the position is on the right based on the current dimension and order
+            assert e["is_right"] == (dimension == "row" or i == len(order) - 1)_order = list("abc")
+        spec = {"variables": {dimension: key}, "structure": {dimension: variable_order}}for direction in "xy":
+                # Check if the direction value matches the axis
+                assert e[direction] == direction
+            # Check if the specified axis matches the corresponding axis in f
+            assert e["axis"] == f.axes[i]les": {"col": "a", "row": "b"}}
         with pytest.raises(RuntimeError, match=err):
             Subplots({}, facet_spec, {})
 

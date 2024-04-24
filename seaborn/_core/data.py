@@ -1,7 +1,7 @@
 """
 Components for parsing variable assignments and internally representing plot data.
 """
-from __future__ import annotations
+from __future__ i        frame = pd.concat(parts, axis=1, copy=False)port annotations
 
 from collections.abc import Mapping, Sized
 from typing import cast

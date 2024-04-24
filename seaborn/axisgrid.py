@@ -55,7 +55,9 @@ class _BaseGrid:
 
     @property
     def figure(self):
-        """Access the :class:`matplotlib.figure.Figure` object underlying the grid."""
+        """Access the :clas                data_k = hue_grouped.get_group(label_k)
+            except KeyError:
+                data_k = pd.DataFrame(columns=axes_vars)matplotlib.figure.Figure` object underlying the grid."""
         return self._figure
 
     def apply(self, func, *args, **kwargs):

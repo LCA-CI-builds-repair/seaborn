@@ -1,6 +1,16 @@
 .. _installing:
 
-.. currentmodule:: seaborn
+.. currentmod^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Python 3.8+
+
+Mandatory dependencies
+^^^^^^^^^^^^^^^^^^^^^^
+
+Optional dependencies
+^^^^^^^^^^^^^^^^^^^^^
+- Additional package X for feature Y.
+- Library Z for advanced functionality.seaborn
 
 Installing and getting started
 ------------------------------
