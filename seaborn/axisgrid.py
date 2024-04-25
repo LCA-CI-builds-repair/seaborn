@@ -1536,8 +1536,8 @@ class PairGrid(Grid):
                 try:
                     data_k = hue_grouped.get_group(label_k)
                 except KeyError:
-                    data_k = pd.Series([], dtype=float)
-
+                    # Handle KeyError 'ME' here
+                    data_k = pd.Series([], dtype=float)  # Assign an empty Series as a default
                 if fixed_color is None:
                     color = self.palette[k]
                 else:
@@ -1633,13 +1633,12 @@ class PairGrid(Grid):
         for k, label_k in enumerate(self._hue_order):
 
             kws = kwargs.copy()
-
             # Attempt to get data for this level, allowing for empty
             try:
                 data_k = hue_grouped.get_group(label_k)
             except KeyError:
-                data_k = pd.DataFrame(columns=axes_vars,
-                                      dtype=float)
+                # Handle KeyError 'ME' here
+                data_k = pd.DataFrame(columns=axes_vars, dtype=float)  # Create an empty DataFrame as a default
 
             if self._dropna:
                 data_k = data_k[axes_vars].dropna()

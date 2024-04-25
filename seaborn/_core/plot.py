@@ -1434,9 +1434,12 @@ class Plotter:
                 # so any original order is no longer valid. Default ordering rules
                 # sorted unique numbers will correctly reconstruct intended order
                 # TODO This is tricky, make sure we add some tests for this
-                if var not in "xy" and var in scales:
-                    return getattr(scales[var], "order", None)
-
+                try:
+                    if var not in "xy" and var in scales:
+                        return getattr(scales[var], "order", None)
+                except KeyError as e:
+                    # Handle KeyError 'ME' here
+                    return None  # Return None or implement custom handling
             if orient in df:
                 width = pd.Series(index=df.index, dtype=float)
                 for view in subplots:

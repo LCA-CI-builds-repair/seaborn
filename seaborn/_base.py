@@ -216,7 +216,6 @@ class HueMapping(SemanticMapping):
             map_type = var_type
 
         return map_type
-
     def categorical_mapping(self, data, palette, order):
         """Determine colors when the hue mapping is categorical."""
         # -- Identify the order and name of the levels
@@ -226,9 +225,13 @@ class HueMapping(SemanticMapping):
 
         # -- Identify the set of colors to use
 
-        if isinstance(palette, dict):
+        try:
+            if isinstance(palette, dict):
 
-            missing = set(levels) - set(palette)
+                missing = set(levels) - set(palette)
+        except KeyError as e:
+            # Handle KeyError 'ME' here
+            missing = set(levels)  # Assign a default value or implement custom handling
             if any(missing):
                 err = "The palette dictionary is missing keys: {}"
                 raise ValueError(err.format(missing))
