@@ -235,7 +235,7 @@ class TestContinuous:
     def test_log_tick_every(self, x):
 
         with pytest.raises(RuntimeError, match="`every` not supported"):
-            Continuous(trans="log").tick(every=2)
+Continuous(trans="log").tick(start=1, every=2)
 
     def test_symlog_tick_default(self, x):
 
