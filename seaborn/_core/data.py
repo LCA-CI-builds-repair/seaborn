@@ -164,12 +164,12 @@ class PlotData:
         """
         source_data: Mapping | DataFrame
         frame: DataFrame
-        names: dict[str, str | None]
-        ids: dict[str, str | int]
+        new_names: dict[str, str | None]
+        new_ids: dict[str, str | int]
 
         plot_data = {}
-        names = {}
-        ids = {}
+        new_names = {}
+        new_ids = {}
 
         given_data = data is not None
         if data is None:

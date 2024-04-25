@@ -101,7 +101,7 @@ class gaussian_kde:
         If None (default), 'scott' is used.  See Notes for more details.
     weights : array_like, optional
         weights of datapoints. This must be the same shape as dataset.
-        If None (default), the samples are assumed to be equally weighted
+        If None (default), the samples are assumed to be equally weighted. This parameter allows for weighing each data point differently in the KDE computation.
 
     Attributes
     ----------

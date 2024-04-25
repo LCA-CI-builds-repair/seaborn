@@ -68,7 +68,6 @@ class _BaseGrid:
         See the `pipe` method if you want the return value.
 
         Added in v0.12.0.
-
         """
         func(self, *args, **kwargs)
         return self
@@ -81,6 +80,15 @@ class _BaseGrid:
         positional argument. Additional arguments are passed through.
         The return value of `func` becomes the return value of this method.
         See the `apply` method if you want to return self instead.
+
+        Parameters:
+        - func: function
+            The user-supplied function that accepts an object of this type as the first positional argument.
+        - args: positional arguments to be passed to `func`.
+        - kwargs: keyword arguments to be passed to `func`.
+
+        Returns:
+        - The return value of the `func`, which becomes the return value of this method.
 
         Added in v0.12.0.
 

@@ -341,7 +341,7 @@ def plotting_context(context=None, font_scale=1, rc=None):
     matplotlib rcParams system.
 
     The base context is "notebook", and the other contexts are "paper", "talk",
-    and "poster", which are version of the notebook parameters scaled by different
+    and "poster", which are versions of the notebook parameters scaled by different
     values. Font elements can also be scaled independently of (but relative to)
     the other values.
 
