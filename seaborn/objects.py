@@ -19,6 +19,7 @@ Each layer has a :class:`Mark` and optional :class:`Stat` and/or :class:`Move`.
 Plots can have multiple layers.
 
 The other general type of object is a :class:`Scale` subclass, which provide an
+
 interface for controlling the mappings between data values and visual properties.
 Pass :class:`Scale` objects to :meth:`Plot.scale`.
 
