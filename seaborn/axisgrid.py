@@ -1633,7 +1633,6 @@ class PairGrid(Grid):
         for k, label_k in enumerate(self._hue_order):
 
             kws = kwargs.copy()
-
             # Attempt to get data for this level, allowing for empty
             try:
                 data_k = hue_grouped.get_group(label_k)
@@ -1644,10 +1643,11 @@ class PairGrid(Grid):
             if self._dropna:
                 data_k = data_k[axes_vars].dropna()
 
-            x = data_k[x_var]
-            y = data_k[y_var]
+            if not data_k.empty:
+                x = data_k[x_var]
+                y = data_k[y_var]
 
-            for kw, val_list in self.hue_kws.items():
+                for kw, val_list in self.hue_kws.items():
                 kws[kw] = val_list[k]
             kws.setdefault("color", self.palette[k])
             if self._hue_var is not None:

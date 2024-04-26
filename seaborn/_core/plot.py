@@ -1639,14 +1639,15 @@ class Plotter:
                 for key in itertools.product(*grouping_keys):
 
                     pd_key = (
-                        key[0] if len(key) == 1 and _version_predates(pd, "2.2.0")
-                        else key
-                    )
-                    try:
-                        df_subset = grouped_df.get_group(pd_key)
-                    except KeyError:
-                        # TODO (from initial work on categorical plots refactor)
-                        # We are adding this to allow backwards compatability
+                        pd_key = (
+                            key[0] if len(key) == 1 and _version_predates(pd, "2.2.0")
+                            else key
+                        )
+                        try:
+                            df_subset = grouped_df.get_group(pd_key)
+                        except KeyError:
+                            # TODO (from initial work on categorical plots refactor)
+                            # We are adding this to allow backwards compatibility
                         # with the empty artists that old categorical plots would
                         # add (before 0.12), which we may decide to break, in which
                         # case this option could be removed
