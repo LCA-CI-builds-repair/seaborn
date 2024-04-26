@@ -155,11 +155,12 @@ class PlotData:
 
         Raises
         ------
-        TypeError
-            When data source is not a DataFrame or Mapping.
-        ValueError
-            When variables are strings that don't appear in `data`, or when they are
-            non-indexed vector datatypes that have a different length from `data`.
+        if not isinstance(data, (DataFrame, Mapping)):
+            raise TypeError("Data source must be a DataFrame or Mapping.")
+        if not all(var in data for var in variables):
+            raise ValueError("Variables must be present in the data.")
+        if not all(len(data[var]) == len(data[variables[0]]) for var in variables[1:]):
+            raise ValueError("Variables must have the same length as data.")
 
         """
         source_data: Mapping | DataFrame

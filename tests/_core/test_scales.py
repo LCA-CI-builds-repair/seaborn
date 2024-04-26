@@ -199,15 +199,12 @@ class TestContinuous:
         assert_array_equal(a.minor.locator(), expected)
 
     def test_log_tick_default(self, x):
-
+    def test_log_tick_upto(self, x):
         s = Continuous(trans="log")._setup(x, Coordinate())
         a = PseudoAxis(s._matplotlib_scale)
         a.set_view_interval(.5, 1050)
         ticks = a.major.locator()
         assert np.allclose(np.diff(np.log10(ticks)), 1)
-
-    def test_log_tick_upto(self, x):
-
         n = 3
         s = Continuous(trans="log").tick(upto=n)._setup(x, Coordinate())
         a = PseudoAxis(s._matplotlib_scale)
