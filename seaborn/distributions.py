@@ -629,7 +629,6 @@ class _DistributionPlotter(VectorPlotter):
                     artist.sticky_edges.y[:] = sticky_data
 
                 hist_artists.append(artist)
-
             if kde:
 
                 # Add in the density curves
@@ -962,6 +961,7 @@ class _DistributionPlotter(VectorPlotter):
         for sub_vars, _ in self.iter_data("hue", reverse=True):
 
             # Extract the support grid and density curve for this level
+            # Extract the support grid and density curve for this level
             key = tuple(sub_vars.items())
             try:
                 density = densities[key]
@@ -969,8 +969,6 @@ class _DistributionPlotter(VectorPlotter):
                 continue
             support = density.index
             fill_from = baselines[key]
-
-            ax = self._get_axes(sub_vars)
 
             if "hue" in self.variables:
                 sub_color = self._hue_map(sub_vars["hue"])

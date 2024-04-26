@@ -366,7 +366,6 @@ class SizeMapping(SemanticMapping):
             map_type = var_type
 
         return map_type
-
     def _lookup_single(self, key):
 
         try:
@@ -376,7 +375,7 @@ class SizeMapping(SemanticMapping):
             if np.ma.is_masked(normed):
                 normed = np.nan
             value = self.size_range[0] + normed * np.ptp(self.size_range)
-        return value
+        return value  # Return the calculated value based on the key
 
     def categorical_mapping(self, data, sizes, order):
 
@@ -943,6 +942,7 @@ class VectorPlotter:
             for key in iter_keys:
 
                 pd_key = (
+                pd_key = (
                     key[0] if len(key) == 1 and _version_predates(pd, "2.2.0") else key
                 )
                 try:
@@ -950,7 +950,6 @@ class VectorPlotter:
                 except KeyError:
                     # XXX we are adding this to allow backwards compatibility
                     # with the empty artists that old categorical plots would
-                    # add (before 0.12), which we may decide to break, in which
                     # case this option could be removed
                     data_subset = data.loc[[]]
 

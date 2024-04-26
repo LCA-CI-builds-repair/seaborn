@@ -149,7 +149,6 @@ class TestContinuous:
             Continuous().tick((1, 2))
 
     def test_tick_upto(self, x):
-
         for n in [2, 5, 10]:
             a = self.setup_ticks(x, upto=n)
             assert len(a.major.locator()) <= (n + 1)
@@ -173,7 +172,6 @@ class TestContinuous:
         locs = [.2, .5, .9]
         a = self.setup_ticks(x, at=locs)
         assert_array_equal(a.major.locator(), locs)
-
     def test_tick_count(self, x):
 
         n = 8

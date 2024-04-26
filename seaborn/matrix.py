@@ -1062,15 +1062,16 @@ class ClusterGrid(Grid):
         self.mask = self.mask.iloc[yind, xind]
 
         # Try to reorganize specified tick labels, if provided
-        xtl = kws.pop("xticklabels", "auto")
+        xticklabels = kws.pop("xticklabels", "auto")
         try:
-            xtl = np.asarray(xtl)[xind]
-        except (TypeError, IndexError):
+            xticklabels = np.asarray(xticklabels)[xind]
+        except TypeError:
             pass
-        ytl = kws.pop("yticklabels", "auto")
+        
+        yticklabels = kws.pop("yticklabels", "auto")
         try:
-            ytl = np.asarray(ytl)[yind]
-        except (TypeError, IndexError):
+            yticklabels = np.asarray(yticklabels)[yind]
+        except IndexError:
             pass
 
         # Reorganize the annotations to match the heatmap

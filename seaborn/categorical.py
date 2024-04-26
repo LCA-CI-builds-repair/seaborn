@@ -135,8 +135,8 @@ class _CategoricalPlotter(VectorPlotter):
         """Implement backwards compatibility for hue parametrization.
 
         Note: the force_hue parameter is used so that functions can be shown to
-        pass existing tests during refactoring and then tested for new behavior.
-        It can be removed after completion of the work.
+        # pass existing tests during refactoring and then tested for new behavior.
+        # It can be removed after completion of the work.
 
         """
         # The original categorical functions applied a palette to the categorical axis
@@ -1153,9 +1153,9 @@ class _CategoricalPlotter(VectorPlotter):
                     **inner_kws,
                     "markeredgecolor": "w",
                     "markerfacecolor": "w",
-                    "color": linecolor,  # simplify tests
-                }
-                ax.plot(invx(x2), invy(y2), **dot_kws)
+                "color": linecolor,  # Set the color for the line plot
+            }
+            ax.plot(invx(x2), invy(y2), **dot_kws)
 
         legend_artist = _get_patch_legend_artist(fill)
         common_kws = {**plot_kws, "linewidth": linewidth, "edgecolor": linecolor}

@@ -172,8 +172,8 @@ def _get_win_folder_with_pywin32(csidl_name):
                 dir = win32api.GetShortPathName(dir)
             except ImportError:
                 pass
-    except UnicodeError:
-        pass
+        except UnicodeError:
+            pass
     return dir
 
 
