@@ -517,11 +517,11 @@ def set_palette(palette, n_colors=None, desat=None, color_codes=False):
         color codes (e.g. "b", "g", "r", etc.) to the colors from this palette.
 
     See Also
-    --------
-    color_palette : build a color palette or set the color cycle temporarily
-                    in a ``with`` statement.
-    set_context : set parameters to scale plot elements
-    set_style : set the default parameters for figure style
+    # --------
+    # color_palette : build a color palette or set the color cycle temporarily
+    #                 in a ``with`` statement.
+    # set_context : set parameters to scale plot elements
+    # set_style : set the default parameters for figure style
 
     """
     colors = palettes.color_palette(palette, n_colors, desat)

@@ -523,18 +523,21 @@ By default, the plot aggregates over multiple `y` values at each value of
 interval for that estimate.
 
 Parameters
-----------
-{params.core.data}
-{params.core.xy}
-hue : vector or key in `data`
-    Grouping variable that will produce lines with different colors.
-    Can be either categorical or numeric, although color mapping will
-    behave differently in latter case.
-size : vector or key in `data`
-    Grouping variable that will produce lines with different widths.
-    Can be either categorical or numeric, although size mapping will
-    behave differently in latter case.
-style : vector or key in `data`
+# ----------
+# {params.core.data}
+# {params.core.xy}
+# hue : vector or key in `data`
+#     Grouping variable that will produce lines with different colors.
+#     Can be either categorical or numeric, although color mapping will
+#     behave differently in latter case.
+# size : vector or key in `data`
+#     Grouping variable that will produce lines with different widths.
+#     Can be either categorical or numeric, although size mapping will
+#     behave differently in latter case.
+# style : vector or key in `data`
+#     Grouping variable that will produce lines with different styles.
+#     Can be either categorical or numeric, although style mapping will
+#     behave differently in latter case.
     Grouping variable that will produce lines with different dashes
     and/or markers. Can have a numeric dtype but will always be treated
     as categorical.
@@ -641,9 +644,6 @@ Draw a scatter plot with possibility of several semantic groupings.
 {narrative.relational_semantic}
 
 Parameters
-----------
-{params.core.data}
-{params.core.xy}
 hue : vector or key in `data`
     Grouping variable that will produce points with different colors.
     Can be either categorical or numeric, although color mapping will
@@ -653,6 +653,9 @@ size : vector or key in `data`
     Can be either categorical or numeric, although size mapping will
     behave differently in latter case.
 style : vector or key in `data`
+    Grouping variable that will produce points with different markers.
+    Can have a numeric dtype but will always be treated as categorical.
+{params.core.palette}
     Grouping variable that will produce points with different markers.
     Can have a numeric dtype but will always be treated as categorical.
 {params.core.palette}

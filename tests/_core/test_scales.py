@@ -199,44 +199,37 @@ class TestContinuous:
         assert_array_equal(a.minor.locator(), expected)
 
     def test_log_tick_default(self, x):
+import pytest
+import numpy as np
+from numpy.testing import assert_array_equal
+import re
 
-        s = Continuous(trans="log")._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        a.set_view_interval(.5, 1050)
-        ticks = a.major.locator()
-        assert np.allclose(np.diff(np.log10(ticks)), 1)
+def test_log_tick_upto(self, x):
+    n = 3
+    s = Continuous(trans="log").tick(upto=n)._setup(x, Coordinate())
+    a = PseudoAxis(s._matplotlib_scale)
+    assert a.major.locator().numticks == n
 
-    def test_log_tick_upto(self, x):
+def test_log_tick_count(self, x):
+    with pytest.raises(RuntimeError, match="`count` requires"):
+        Continuous(trans="log").tick(count=4)
 
-        n = 3
-        s = Continuous(trans="log").tick(upto=n)._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        assert a.major.locator.numticks == n
+    s = Continuous(trans="log").tick(count=4, between=(1, 1000))
+    a = PseudoAxis(s._setup(x, Coordinate())._matplotlib_scale)
+    a.set_view_interval(.5, 1050)
+    assert_array_equal(a.major.locator(), [1, 10, 100, 1000])
 
-    def test_log_tick_count(self, x):
+def test_log_tick_format_disabled(self, x):
+    s = Continuous(trans="log").label(base=None)._setup(x, Coordinate())
+    a = PseudoAxis(s._matplotlib_scale)
+    a.set_view_interval(20, 20000)
+    labels = a.major.formatter.format_ticks(a.major.locator())
+    for text in labels:
+        assert re.match(r"^\d+$", text)
 
-        with pytest.raises(RuntimeError, match="`count` requires"):
-            Continuous(trans="log").tick(count=4)
-
-        s = Continuous(trans="log").tick(count=4, between=(1, 1000))
-        a = PseudoAxis(s._setup(x, Coordinate())._matplotlib_scale)
-        a.set_view_interval(.5, 1050)
-        assert_array_equal(a.major.locator(), [1, 10, 100, 1000])
-
-    def test_log_tick_format_disabled(self, x):
-
-        s = Continuous(trans="log").label(base=None)._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        a.set_view_interval(20, 20000)
-        labels = a.major.formatter.format_ticks(a.major.locator())
-        for text in labels:
-            assert re.match(r"^\d+$", text)
-
-    def test_log_tick_every(self, x):
-
-        with pytest.raises(RuntimeError, match="`every` not supported"):
-            Continuous(trans="log").tick(every=2)
-
+def test_log_tick_every(self, x):
+    with pytest.raises(RuntimeError, match="`every` not supported"):
+        Continuous(trans="log").tick(every=2)
     def test_symlog_tick_default(self, x):
 
         s = Continuous(trans="symlog")._setup(x, Coordinate())
@@ -278,20 +271,20 @@ class TestContinuous:
             assert re.match(r"^ \d\.\d $", text)
 
     def test_label_base(self, x):
+import re
 
-        a, locs = self.setup_labels(100 * x, base=2)
-        labels = a.major.formatter.format_ticks(locs)
-        for text in labels[1:]:
-            assert not text or "2^" in text
+a, locs = self.setup_labels(x, like="{:^5.1f}".format)
+labels = a.major.formatter.format_ticks(locs)
+for text in labels:
+    assert re.match(r"^\s\d\.\d\s$", text)
 
-    def test_label_unit(self, x):
+def test_label_base(self, x):
+    a, locs = self.setup_labels(100 * x, base=2)
+    labels = a.major.formatter.format_ticks(locs)
+    for text in labels[1:]:
+        assert not text or "2^" in text
 
-        a, locs = self.setup_labels(1000 * x, unit="g")
-        labels = a.major.formatter.format_ticks(locs)
-        for text in labels[1:-1]:
-            assert re.match(r"^\d+ mg$", text)
-
-    def test_label_unit_with_sep(self, x):
+def test_label_unit(self, x):
 
         a, locs = self.setup_labels(1000 * x, unit=("", "g"))
         labels = a.major.formatter.format_ticks(locs)

@@ -808,11 +808,11 @@ def set_color_codes(palette="deep"):
         Named seaborn palette to use as the source of colors.
 
     See Also
-    --------
-    set : Color codes can be set through the high-level seaborn style
-          manager.
-    set_palette : Color codes can also be set through the function that
-                  sets the matplotlib color cycle.
+    # --------
+    # set : Color codes can be set through the high-level seaborn style
+    #       manager.
+    # set_palette : Color codes can also be set through the function that
+    #               sets the matplotlib color cycle.
 
     """
     if palette == "reset":

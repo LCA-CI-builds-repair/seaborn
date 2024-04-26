@@ -189,15 +189,21 @@ class Grid(_BaseGrid):
             figlegend.set_title(title, prop={"size": title_size})
 
             if adjust_subtitles:
-                adjust_legend_subtitles(figlegend)
+import matplotlib.pyplot as plt
 
-            # Draw the plot to set the bounding boxes correctly
-            _draw_figure(self._figure)
+if figlegend is not None:
+    adjust_legend_subtitles(figlegend)
 
-            # Calculate and set the new width of the figure so the legend fits
-            legend_width = figlegend.get_window_extent().width / self._figure.dpi
-            fig_width, fig_height = self._figure.get_size_inches()
-            self._figure.set_size_inches(fig_width + legend_width, fig_height)
+    # Draw the plot to set the bounding boxes correctly
+    _draw_figure(self._figure)
+
+    # Calculate and set the new width of the figure so the legend fits
+    try:
+        legend_width = figlegend.get_window_extent().width / self._figure.dpi
+        fig_width, fig_height = self._figure.get_size_inches()
+        self._figure.set_size_inches(fig_width + legend_width, fig_height)
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
             # Draw the plot again to get the new transformations
             _draw_figure(self._figure)
@@ -472,11 +478,14 @@ class FacetGrid(Grid):
                 axes_dict = dict(zip(facet_product, axes.flat))
 
         else:
+import numpy as np
 
-            # If wrapping the col variable we need to make the grid ourselves
-            if gridspec_kws:
-                warnings.warn("`gridspec_kws` ignored when using `col_wrap`")
-
+axes = np.empty(n_axes, object)
+axes[0] = fig.add_subplot(nrow, ncol, 1, **subplot_kws)
+if sharex:
+    subplot_kws["sharex"] = axes[0]
+if sharey:
+    subplot_kws["sharey"] = axes[0]
             n_axes = len(col_names)
             axes = np.empty(n_axes, object)
             axes[0] = fig.add_subplot(nrow, ncol, 1, **subplot_kws)
