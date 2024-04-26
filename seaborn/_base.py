@@ -376,8 +376,7 @@ class SizeMapping(SemanticMapping):
             if np.ma.is_masked(normed):
                 normed = np.nan
             value = self.size_range[0] + normed * np.ptp(self.size_range)
-        return value
-
+            return value
     def categorical_mapping(self, data, sizes, order):
 
         levels = categorical_order(data, order)

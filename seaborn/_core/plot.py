@@ -1645,8 +1645,6 @@ class Plotter:
                     try:
                         df_subset = grouped_df.get_group(pd_key)
                     except KeyError:
-                        # TODO (from initial work on categorical plots refactor)
-                        # We are adding this to allow backwards compatability
                         # with the empty artists that old categorical plots would
                         # add (before 0.12), which we may decide to break, in which
                         # case this option could be removed

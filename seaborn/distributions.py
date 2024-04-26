@@ -629,11 +629,8 @@ class _DistributionPlotter(VectorPlotter):
                     artist.sticky_edges.y[:] = sticky_data
 
                 hist_artists.append(artist)
-
             if kde:
-
                 # Add in the density curves
-
                 try:
                     density = densities[key]
                 except KeyError:
