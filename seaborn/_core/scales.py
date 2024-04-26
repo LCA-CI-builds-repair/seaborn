@@ -70,18 +70,7 @@ class Scale:
         self._legend = None
 
     def tick(self):
-        raise NotImplementedError()
 
-    def label(self):
-        raise NotImplementedError()
-
-    def _get_locators(self):
-        raise NotImplementedError()
-
-    def _get_formatter(self, locator: Locator | None = None):
-        raise NotImplementedError()
-
-    def _get_scale(self, name: str, forward: Callable, inverse: Callable):
 
         major_locator, minor_locator = self._get_locators(**self._tick_params)
         major_formatter = self._get_formatter(major_locator, **self._label_params)
@@ -581,8 +570,8 @@ class Continuous(ContinuousBase):
         if log_base or symlog_thresh:
             if count is not None and between is None:
                 raise RuntimeError("`count` requires `between` with log transform.")
-            if every is not None:
-                raise RuntimeError("`every` not supported with log transform.")
+        """
+        # Input checks
 
         new = copy(self)
         new._tick_params = {

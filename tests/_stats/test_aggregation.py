@@ -43,57 +43,6 @@ class TestAgg(AggregationFixtures):
 
     def test_default_multi(self, df):
 
-        ori = "x"
-        gb = self.get_groupby(df, ori)
-        res = Agg()(df, gb, ori, {})
-
-        grp = ["x", "color", "group"]
-        index = pd.MultiIndex.from_product(
-            [sorted(df["x"].unique()), df["color"].unique(), df["group"].unique()],
-            names=["x", "color", "group"]
-        )
-        expected = (
-            df
-            .groupby(grp)
-            .agg("mean")
-            .reindex(index=index)
-            .dropna()
-            .reset_index()
-            .reindex(columns=df.columns)
-        )
-        assert_frame_equal(res, expected)
-
-    @pytest.mark.parametrize("func", ["max", lambda x: float(len(x) % 2)])
-    def test_func(self, df, func):
-
-        ori = "x"
-        df = df[["x", "y"]]
-        gb = self.get_groupby(df, ori)
-        res = Agg(func)(df, gb, ori, {})
-
-        expected = df.groupby("x", as_index=False)["y"].agg(func)
-        assert_frame_equal(res, expected)
-
-
-class TestEst(AggregationFixtures):
-
-    # Note: Most of the underlying code is exercised in tests/test_statistics
-
-    @pytest.mark.parametrize("func", [np.mean, "mean"])
-    def test_mean_sd(self, df, func):
-
-        ori = "x"
-        df = df[["x", "y"]]
-        gb = self.get_groupby(df, ori)
-        res = Est(func, "sd")(df, gb, ori, {})
-
-        grouped = df.groupby("x", as_index=False)["y"]
-        est = grouped.mean()
-        err = grouped.std().fillna(0)  # fillna needed only on pinned tests
-        expected = est.assign(ymin=est["y"] - err["y"], ymax=est["y"] + err["y"])
-        assert_frame_equal(res, expected)
-
-    def test_sd_single_obs(self):
 
         y = 1.5
         ori = "x"

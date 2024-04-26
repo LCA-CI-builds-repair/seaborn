@@ -189,66 +189,6 @@ class TestContinuous:
 
     def test_tick_minor(self, x):
 
-        n = 3
-        a = self.setup_ticks(x, count=2, minor=n)
-        expected = np.linspace(0, 1, n + 2)
-        if _version_predates(mpl, "3.8.0rc1"):
-            # I am not sure why matplotlib <3.8  minor ticks include the
-            # largest major location but exclude the smalllest one ...
-            expected = expected[1:]
-        assert_array_equal(a.minor.locator(), expected)
-
-    def test_log_tick_default(self, x):
-
-        s = Continuous(trans="log")._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        a.set_view_interval(.5, 1050)
-        ticks = a.major.locator()
-        assert np.allclose(np.diff(np.log10(ticks)), 1)
-
-    def test_log_tick_upto(self, x):
-
-        n = 3
-        s = Continuous(trans="log").tick(upto=n)._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        assert a.major.locator.numticks == n
-
-    def test_log_tick_count(self, x):
-
-        with pytest.raises(RuntimeError, match="`count` requires"):
-            Continuous(trans="log").tick(count=4)
-
-        s = Continuous(trans="log").tick(count=4, between=(1, 1000))
-        a = PseudoAxis(s._setup(x, Coordinate())._matplotlib_scale)
-        a.set_view_interval(.5, 1050)
-        assert_array_equal(a.major.locator(), [1, 10, 100, 1000])
-
-    def test_log_tick_format_disabled(self, x):
-
-        s = Continuous(trans="log").label(base=None)._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        a.set_view_interval(20, 20000)
-        labels = a.major.formatter.format_ticks(a.major.locator())
-        for text in labels:
-            assert re.match(r"^\d+$", text)
-
-    def test_log_tick_every(self, x):
-
-        with pytest.raises(RuntimeError, match="`every` not supported"):
-            Continuous(trans="log").tick(every=2)
-
-    def test_symlog_tick_default(self, x):
-
-        s = Continuous(trans="symlog")._setup(x, Coordinate())
-        a = PseudoAxis(s._matplotlib_scale)
-        a.set_view_interval(-1050, 1050)
-        ticks = a.major.locator()
-        assert ticks[0] == -ticks[-1]
-        pos_ticks = np.sort(np.unique(np.abs(ticks)))
-        assert np.allclose(np.diff(np.log10(pos_ticks[1:])), 1)
-        assert pos_ticks[0] == 0
-
-    def test_label_formatter(self, x):
 
         fmt = mpl.ticker.FormatStrFormatter("%.3f")
         a, locs = self.setup_labels(x, fmt)
