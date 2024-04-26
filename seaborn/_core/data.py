@@ -162,11 +162,10 @@ class PlotData:
             non-indexed vector datatypes that have a different length from `data`.
 
         """
-        source_data: Mapping | DataFrame
+        source_data: Union[Mapping, DataFrame]
         frame: DataFrame
-        names: dict[str, str | None]
-        ids: dict[str, str | int]
-
+        names: Dict[str, Union[str, None]]
+        ids: Dict[str, Union[str, int]]
         plot_data = {}
         names = {}
         ids = {}
