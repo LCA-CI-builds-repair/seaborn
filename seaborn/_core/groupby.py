@@ -24,7 +24,6 @@ class GroupBy:
     - It simplifies some complexities regarding the return type and Index contents
       one encounters with Pandas, especially for DataFrame -> DataFrame applies
     - It increases future flexibility regarding alternate DataFrame libraries
-
     """
     def __init__(self, order: list[str] | dict[str, list | None]):
         """

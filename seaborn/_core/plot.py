@@ -1824,7 +1824,7 @@ class Plotter:
                     # to avoid typechecking this statement. We also catch a TypeError
                     # as a plugin LayoutEngine may not support it either.
                     # Alternatively we could guard this with a check on the engine type,
-                    # but that would make later-developed engines would un-useable.
+                    # but that would make later-developed engines un-usable.
                     engine.set(rect=[left, bottom, width, height])  # type: ignore
                 except TypeError:
                     # Should we warn / raise? Note that we don't expect to get here
