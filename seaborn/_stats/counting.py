@@ -83,7 +83,6 @@ class Hist(Stat):
     discrete : bool
         If True, set `binwidth` and `binrange` so that bins have unit width and
         are centered on integer values
-
     Notes
     -----
     The choice of bins for computing and plotting a histogram can exert

@@ -656,7 +656,6 @@ class Plot:
         wrap : int
             When using only `col` or `row`, wrap subplots across a two-dimensional
             grid with this many subplots on the faceting dimension.
-
         Examples
         --------
         .. include:: ../docstrings/objects.Plot.facet.rst
