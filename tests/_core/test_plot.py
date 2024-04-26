@@ -938,7 +938,6 @@ class TestPlotting:
             p.theme("arg1", "arg2")
 
     def test_theme_validation(self):
-
         p = Plot()
         # You'd think matplotlib would raise a TypeError here, but it doesn't
         with pytest.raises(ValueError, match="Key axes.linewidth:"):

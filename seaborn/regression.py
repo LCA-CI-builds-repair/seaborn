@@ -149,7 +149,6 @@ class _RegressionPlotter(_LinearPlotter):
             y = self.y + np.random.uniform(-y_j, y_j, len(self.y))
 
         return x, y
-
     @property
     def estimate_data(self):
         """Data with a point estimate and CI for each discrete x value."""

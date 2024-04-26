@@ -1147,9 +1147,9 @@ class _CategoricalPlotter(VectorPlotter):
                     **inner_kws,
                     "markeredgecolor": "w",
                     "markerfacecolor": "w",
-                    "color": linecolor,  # simplify tests
-                }
-                ax.plot(invx(x2), invy(y2), **dot_kws)
+                "color": linecolor,  # simplify tests
+            }
+            ax.plot(invx(x2), invy(y2), **dot_kws)
 
         legend_artist = _get_patch_legend_artist(fill)
         common_kws = {**plot_kws, "linewidth": linewidth, "edgecolor": linecolor}

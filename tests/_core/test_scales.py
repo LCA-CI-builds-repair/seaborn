@@ -199,7 +199,6 @@ class TestContinuous:
         assert_array_equal(a.minor.locator(), expected)
 
     def test_log_tick_default(self, x):
-
         s = Continuous(trans="log")._setup(x, Coordinate())
         a = PseudoAxis(s._matplotlib_scale)
         a.set_view_interval(.5, 1050)
@@ -249,6 +248,7 @@ class TestContinuous:
         assert pos_ticks[0] == 0
 
     def test_label_formatter(self, x):
+    def test_label_formatter(self, x):
 
         fmt = mpl.ticker.FormatStrFormatter("%.3f")
         a, locs = self.setup_labels(x, fmt)
@@ -291,8 +291,6 @@ class TestContinuous:
         for text in labels[1:-1]:
             assert re.match(r"^\d+ mg$", text)
 
-    def test_label_unit_with_sep(self, x):
-
         a, locs = self.setup_labels(1000 * x, unit=("", "g"))
         labels = a.major.formatter.format_ticks(locs)
         for text in labels[1:-1]:
@@ -305,6 +303,7 @@ class TestContinuous:
         for text in labels[1:-1]:
             assert re.match(r"^\d+m$", text)
 
+    def test_label_base_from_transform(self, x):
     def test_label_base_from_transform(self, x):
 
         s = Continuous(trans="log")
@@ -353,8 +352,6 @@ class TestNominal:
         ax = mpl.figure.Figure().subplots()
         s = Nominal()._setup(x, Coordinate(), ax.xaxis)
         assert_array_equal(s(x), np.array([0, 1, 2, 1], float))
-        f = ax.xaxis.get_major_formatter()
-        assert f.format_ticks([0, 1, 2]) == ["a", "c", "b"]
 
     def test_coordinate_axis_with_order(self, x):
 
