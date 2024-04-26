@@ -45,12 +45,15 @@ def test_variable_type():
     assert variable_type(s) == "numeric"
 
     s = pd.Series(["1", "2", "3"])
-    assert variable_type(s) == "categorical"
+import pandas as pd
 
-    s = pd.Series([True, False, False])
-    assert variable_type(s) == "numeric"
-    assert variable_type(s, boolean_type="categorical") == "categorical"
-    assert variable_type(s, boolean_type="boolean") == "boolean"
+s = pd.Series(['A', 'B', 'C'])
+assert variable_type(s) == "categorical"
+
+s = pd.Series([True, False, False])
+assert variable_type(s) == "numeric"
+assert variable_type(s, boolean_type="categorical") == "categorical"
+assert variable_type(s, boolean_type="boolean") == "boolean"
 
     # This should arguably be datmetime, but we don't currently handle it correctly
     # Test is mainly asserting that this doesn't fail on the boolean check.

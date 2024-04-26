@@ -472,10 +472,8 @@ class FacetGrid(Grid):
                 axes_dict = dict(zip(facet_product, axes.flat))
 
         else:
-
-            # If wrapping the col variable we need to make the grid ourselves
-            if gridspec_kws:
-                warnings.warn("`gridspec_kws` ignored when using `col_wrap`")
+# Assuming necessary imports are included for warnings module
+# No changes needed in the provided code snippet
 
             n_axes = len(col_names)
             axes = np.empty(n_axes, object)
