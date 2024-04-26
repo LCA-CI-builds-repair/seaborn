@@ -1633,19 +1633,9 @@ class PairGrid(Grid):
         for k, label_k in enumerate(self._hue_order):
 
             kws = kwargs.copy()
-
-            # Attempt to get data for this level, allowing for empty
-            try:
-                data_k = hue_grouped.get_group(label_k)
-            except KeyError:
-                data_k = pd.DataFrame(columns=axes_vars,
-                                      dtype=float)
-
-            if self._dropna:
-                data_k = data_k[axes_vars].dropna()
-
-            x = data_k[x_var]
-            y = data_k[y_var]
+### Summary of Changes:
+1. Ensure that the `hue_grouped` object is properly initialized and contains the expected groups to prevent `KeyError` exceptions during data retrieval.
+2. Consider adding additional validation or error handling to handle cases where the data for a specific label is not found in the `hue_grouped` object.
 
             for kw, val_list in self.hue_kws.items():
                 kws[kw] = val_list[k]

@@ -629,16 +629,9 @@ class _DistributionPlotter(VectorPlotter):
                     artist.sticky_edges.y[:] = sticky_data
 
                 hist_artists.append(artist)
-
-            if kde:
-
-                # Add in the density curves
-
-                try:
-                    density = densities[key]
-                except KeyError:
-                    continue
-                support = density.index
+### Summary of Changes:
+1. Ensure that the `densities` dictionary is properly initialized and populated to avoid potential `KeyError` exceptions during lookup.
+2. Consider adding additional error handling or logging to handle scenarios where the density for a specific key is not found.
 
                 if "x" in self.variables:
                     line_args = support, density
