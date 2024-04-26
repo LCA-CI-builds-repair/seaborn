@@ -47,6 +47,8 @@ class GroupBy:
         self.order = order
 
     def _get_groups(
+    import pandas as pd
+
         self, data: DataFrame
     ) -> tuple[str | list[str], Index | MultiIndex]:
         """Return index with Cartesian product of ordered grouping variable levels."""

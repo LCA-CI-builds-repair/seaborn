@@ -149,6 +149,7 @@ class _RegressionPlotter(_LinearPlotter):
             y = self.y + np.random.uniform(-y_j, y_j, len(self.y))
 
         return x, y
+    import pandas as pd
 
     @property
     def estimate_data(self):

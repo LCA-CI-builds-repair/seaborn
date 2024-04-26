@@ -135,6 +135,8 @@ class _CategoricalPlotter(VectorPlotter):
         """Implement backwards compatibility for hue parametrization.
 
         Note: the force_hue parameter is used so that functions can be shown to
+    import pandas as pd
+
         pass existing tests during refactoring and then tested for new behavior.
         It can be removed after completion of the work.
 

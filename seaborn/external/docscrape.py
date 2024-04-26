@@ -590,6 +590,8 @@ class FunctionDoc(NumpyDocString):
         NumpyDocString.__init__(self, doc, config)
 
         if not self['Signature'] and func is not None:
+    import pandas as pd
+
             func, func_name = self.get_func()
             try:
                 try:

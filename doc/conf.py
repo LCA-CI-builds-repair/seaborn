@@ -17,14 +17,14 @@ import seaborn
 from seaborn._core.properties import PROPERTIES
 
 sys.path.insert(0, os.path.abspath('sphinxext'))
-
+    import pandas as pd
 
 # -- Project information -----------------------------------------------------
 
 project = 'seaborn'
 copyright = f'2012-{time.strftime("%Y")}'
 author = 'Michael Waskom'
-version = release = seaborn.__version__
+version = release = seaborn.__version_
 
 
 # -- General configuration ---------------------------------------------------

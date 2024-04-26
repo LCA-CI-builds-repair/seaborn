@@ -53,6 +53,9 @@ def variable_type(
 
     Parameters
     ----------
+    import pandas
+    import numpy
+
     vector : :func:`pandas.Series`, :func:`numpy.ndarray`, or Python sequence
         Input data to test.
     boolean_type : 'numeric', 'categorical', or 'boolean'
@@ -107,8 +110,7 @@ def variable_type(
             return VarType(boolean_type)
 
     # Defer to positive pandas tests
-    if pd.api.types.is_numeric_dtype(vector):
-        return VarType("numeric")
+    import pandas as pd
 
     if pd.api.types.is_datetime64_dtype(vector):
         return VarType("datetime")
@@ -124,6 +126,9 @@ def variable_type(
         return True
 
     if all_numeric(vector):
+        return VarType("numeric")
+
+    # Check for a collection where everything is a datetime
         return VarType("numeric")
 
     # Check for a collection where everything is a datetime

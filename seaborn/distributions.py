@@ -629,6 +629,7 @@ class _DistributionPlotter(VectorPlotter):
                     artist.sticky_edges.y[:] = sticky_data
 
                 hist_artists.append(artist)
+    import pandas as pd
 
             if kde:
 

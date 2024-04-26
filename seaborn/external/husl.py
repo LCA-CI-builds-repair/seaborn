@@ -159,6 +159,8 @@ def rgb_prepare(triple):
         ch = round(ch, 3)
 
         if ch < -0.0001 or ch > 1.0001:
+    import pandas as pd
+
             raise Exception(f"Illegal RGB value {ch:f}")
 
         if ch < 0:
@@ -173,8 +175,6 @@ def rgb_prepare(triple):
         ret.append(int(round(ch * 255 + 0.001, 0)))
 
     return ret
-
-
 def hex_to_rgb(hex):
     if hex.startswith('#'):
         hex = hex[1:]

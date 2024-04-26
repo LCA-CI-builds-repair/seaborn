@@ -1430,6 +1430,8 @@ class Plotter:
             orient = layer["orient"] or mark._infer_orient(scales)
 
             def get_order(var):
+    import pandas as pd
+
                 # Ignore order for x/y: they have been scaled to numeric indices,
                 # so any original order is no longer valid. Default ordering rules
                 # sorted unique numbers will correctly reconstruct intended order

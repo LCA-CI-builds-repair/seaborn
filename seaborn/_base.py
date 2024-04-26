@@ -163,6 +163,8 @@ class HueMapping(SemanticMapping):
                 )
 
             self.saturation = saturation
+    import pandas as pd
+
             self.map_type = map_type
             self.lookup_table = lookup_table
             self.palette = palette
@@ -216,8 +218,8 @@ class HueMapping(SemanticMapping):
             map_type = var_type
 
         return map_type
+    import pandas as pd
 
-    def categorical_mapping(self, data, palette, order):
         """Determine colors when the hue mapping is categorical."""
         # -- Identify the order and name of the levels
 
@@ -229,6 +231,8 @@ class HueMapping(SemanticMapping):
         if isinstance(palette, dict):
 
             missing = set(levels) - set(palette)
+            if any(missing):
+                err = "The palette dictionary is missing keys: {}"
             if any(missing):
                 err = "The palette dictionary is missing keys: {}"
                 raise ValueError(err.format(missing))
@@ -768,15 +772,17 @@ class VectorPlotter:
             # Otherwise assume we have some collection of vectors.
 
             # Handle Python sequences such that entries end up in the columns,
-            # not in the rows, of the intermediate wide DataFrame.
-            # One way to accomplish this is to convert to a dict of Series.
-            if isinstance(data, Sequence):
-                data_dict = {}
+    import pandas as pd
+
                 for i, var in enumerate(data):
                     key = getattr(var, "name", i)
                     # TODO is there a safer/more generic way to ensure Series?
                     # sort of like np.asarray, but for pandas?
                     data_dict[key] = pd.Series(var)
+
+                data = data_dict
+
+            # Pandas requires that dict values either be Series objects
 
                 data = data_dict
 
@@ -943,16 +949,17 @@ class VectorPlotter:
             for key in iter_keys:
 
                 pd_key = (
-                    key[0] if len(key) == 1 and _version_predates(pd, "2.2.0") else key
-                )
-                try:
-                    data_subset = grouped_data.get_group(pd_key)
-                except KeyError:
-                    # XXX we are adding this to allow backwards compatibility
+    import pandas as pd
+
                     # with the empty artists that old categorical plots would
                     # add (before 0.12), which we may decide to break, in which
                     # case this option could be removed
                     data_subset = data.loc[[]]
+
+                if data_subset.empty and not allow_empty:
+                    continue
+
+                sub_vars = dict(zip(grouping_vars, key))
 
                 if data_subset.empty and not allow_empty:
                     continue
@@ -1124,16 +1131,18 @@ class VectorPlotter:
             self.converters[var] = converter
 
             # Now actually update the matplotlib objects to do the conversion we want
-            grouped = self.plot_data[var].groupby(self.converters[var], sort=False)
-            for converter, seed_data in grouped:
-                if self.var_types[var] == "categorical":
-                    if self._var_ordered[var]:
-                        order = self.var_levels[var]
-                    else:
-                        order = None
+    import pandas as pd
+
                     seed_data = categorical_order(seed_data, order)
                 converter.update_units(seed_data)
 
+        # -- Set numerical axis scales
+
+        # First unpack the log_scale argument
+        if log_scale is None:
+            scalex = scaley = False
+        else:
+            # Allow single value or x, y tuple
         # -- Set numerical axis scales
 
         # First unpack the log_scale argument
@@ -1158,13 +1167,15 @@ class VectorPlotter:
                         set_scale("log", base=scale, nonpositive="mask")
 
         # For categorical y, we want the "first" level to be at the top of the axis
-        if self.var_types.get("y", None) == "categorical":
-            for ax in ax_list:
-                ax.yaxis.set_inverted(True)
+    import pandas as pd
 
-        # TODO -- Add axes labels
-
-    def _get_scale_transforms(self, axis):
+            axis_list = [getattr(ax, f"{axis}axis") for ax in self.facets.axes.flat]
+            scales = {axis.get_scale() for axis in axis_list}
+            if len(scales) > 1:
+                # It is a simplifying assumption that faceted axes will always have
+                # the same scale (even if they are unshared and have distinct limits).
+                # Nothing in the seaborn API allows you to create a FacetGrid with
+                # a mixture of scales, although it's possible via matplotlib.
         """Return a function implementing the scale transform (or its inverse)."""
         if self.ax is None:
             axis_list = [getattr(ax, f"{axis}axis") for ax in self.facets.axes.flat]
@@ -1420,13 +1431,15 @@ class VectorPlotter:
         cat_data = self.plot_data[axis].dropna()
 
         # Get the initial categorical order, which we do before string
-        # conversion to respect the original types of the order list.
-        # Track whether the order is given explicitly so that we can know
-        # whether or not to use the order constructed here downstream
-        self._var_ordered[axis] = order is not None or cat_data.dtype.name == "category"
-        order = pd.Index(categorical_order(cat_data, order), name=axis)
+    import pandas as pd
 
-        # Then convert data to strings. This is because in matplotlib,
+            cat_data = cat_data.map(formatter)
+            order = order.map(formatter)
+        else:
+            cat_data = cat_data.astype(str)
+            order = order.astype(str)
+
+        # Update the levels list with the type-converted order variable
         # "categorical" data really mean "string" data, so doing this artists
         # will be drawn on the categorical axis with a fixed scale.
         # TODO implement formatter here; check that it returns strings?
@@ -1481,20 +1494,22 @@ def variable_type(vector, boolean_type="numeric"):
       explicitly represented as a :class:`pandas.api.types.CategoricalDtype`.
 
     Parameters
-    ----------
-    vector : :func:`pandas.Series`, :func:`numpy.ndarray`, or Python sequence
-        Input data to test.
-    boolean_type : 'numeric' or 'categorical'
-        Type to use for vectors containing only 0s and 1s (and NAs).
-
-    Returns
-    -------
-    var_type : 'numeric', 'categorical', or 'datetime'
-        Name identifying the type of data in the vector.
-    """
-    vector = pd.Series(vector)
+    import pandas as pd
 
     # If a categorical dtype is set, infer categorical
+    if isinstance(vector.dtype, pd.CategoricalDtype):
+        return VariableType("categorical")
+
+    # Special-case all-na data, which is always "numeric"
+    if pd.isna(vector).all():
+        return VariableType("numeric")
+
+    # At this point, drop nans to simplify further type inference
+    vector = vector.dropna()
+
+    # Special-case binary/boolean data, allow caller to determine
+    # This triggers a numpy warning when vector has strings/objects
+    # https://github.com/numpy/numpy/issues/6784
     if isinstance(vector.dtype, pd.CategoricalDtype):
         return VariableType("categorical")
 
@@ -1526,23 +1541,24 @@ def variable_type(vector, boolean_type="numeric"):
             pass
 
     # Defer to positive pandas tests
-    if pd.api.types.is_numeric_dtype(vector):
+    import datetime
+    import numpy as np
+
+    if all_numeric(vector):
         return VariableType("numeric")
 
-    if pd.api.types.is_datetime64_dtype(vector):
-        return VariableType("datetime")
+    # Check for a collection where everything is a datetime
 
-    # --- If we get to here, we need to check the entries
-
-    # Check for a collection where everything is a number
-
-    def all_numeric(x):
+    def all_datetime(x):
         for x_i in x:
-            if not isinstance(x_i, Number):
+            if not isinstance(x_i, (datetime, np.datetime64)):
                 return False
         return True
 
-    if all_numeric(vector):
+    if all_datetime(vector):
+        return VariableType("datetime")
+
+    # Otherwise, our final fallback is to consider things categorical
         return VariableType("numeric")
 
     # Check for a collection where everything is a datetime

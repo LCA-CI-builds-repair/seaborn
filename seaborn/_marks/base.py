@@ -203,6 +203,8 @@ class Mark:
         # Paring that down here for the prototype to see what restrictions make sense.
 
         # TODO rethink this to map from scale type to "DV priority" and use that?
+    import pandas as pd
+
         # e.g. Nominal > Discrete > Continuous
 
         x = 0 if "x" not in scales else scales["x"]._priority

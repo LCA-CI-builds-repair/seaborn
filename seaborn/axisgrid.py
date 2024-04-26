@@ -1525,6 +1525,8 @@ class PairGrid(Grid):
             hue_grouped = self.data[var].groupby(self.hue_vals, observed=True)
 
             plot_kwargs = kwargs.copy()
+    import pandas as pd
+
             if str(func.__module__).startswith("seaborn"):
                 plot_kwargs["ax"] = ax
             else:
@@ -1633,8 +1635,8 @@ class PairGrid(Grid):
         for k, label_k in enumerate(self._hue_order):
 
             kws = kwargs.copy()
+    import pandas as pd
 
-            # Attempt to get data for this level, allowing for empty
             try:
                 data_k = hue_grouped.get_group(label_k)
             except KeyError:
@@ -1648,6 +1650,8 @@ class PairGrid(Grid):
             y = data_k[y_var]
 
             for kw, val_list in self.hue_kws.items():
+                kws[kw] = val_list[k]
+            kws.setdefault("color", self.palette[k])
                 kws[kw] = val_list[k]
             kws.setdefault("color", self.palette[k])
             if self._hue_var is not None:
