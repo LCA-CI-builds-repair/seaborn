@@ -249,7 +249,6 @@ class PlotData:
                             f" and the vector passed to `{key}` has length {len(val)}."
                         )
                         raise ValueError(err)
-
                 plot_data[key] = val
 
                 # Try to infer the original name using pandas-like metadata
@@ -262,13 +261,13 @@ class PlotData:
         # Construct a tidy plot DataFrame. This will convert a number of
         # types automatically, aligning on index in case of pandas objects
         # TODO Note: this fails when variable specs *only* have scalars!
+        # TODO Note: this fails when variable specs *only* have scalars!
         frame = pd.DataFrame(plot_data)
 
         return frame, names, ids
 
 
 def handle_data_source(data: object) -> pd.DataFrame | Mapping | None:
-    """Convert the data source object to a common union representation."""
     if isinstance(data, pd.DataFrame) or hasattr(data, "__dataframe__"):
         # Check for pd.DataFrame inheritance could be removed once
         # minimal pandas version supports dataframe interchange (1.5.0).
