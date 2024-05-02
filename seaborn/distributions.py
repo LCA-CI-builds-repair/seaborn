@@ -1077,9 +1077,11 @@ class _DistributionPlotter(VectorPlotter):
                 singular = True
 
             if singular:
+                # Refine the warning message with more context
                 msg = (
-                    "KDE cannot be estimated (0 variance or perfect covariance). "
-                    "Pass `warn_singular=False` to disable this warning."
+                    "Kernel Density Estimation (KDE) cannot be estimated due to "
+                    "0 variance or perfect covariance. Pass `warn_singular=False` "
+                    "to disable this warning."
                 )
                 if warn_singular:
                     warnings.warn(msg, UserWarning, stacklevel=3)

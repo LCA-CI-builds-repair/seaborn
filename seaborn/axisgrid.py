@@ -475,6 +475,7 @@ class FacetGrid(Grid):
 
             # If wrapping the col variable we need to make the grid ourselves
             if gridspec_kws:
+                # Add code block here to handle the case when gridspec_kws is true
                 warnings.warn("`gridspec_kws` ignored when using `col_wrap`")
 
             n_axes = len(col_names)
