@@ -1528,6 +1528,7 @@ class PairGrid(Grid):
             if str(func.__module__).startswith("seaborn"):
                 plot_kwargs["ax"] = ax
             else:
+                # Add appropriate handling or code here
                 plt.sca(ax)
 
             for k, label_k in enumerate(self._hue_order):
@@ -1549,7 +1550,7 @@ class PairGrid(Grid):
                 if str(func.__module__).startswith("seaborn"):
                     func(x=data_k, label=label_k, color=color, **plot_kwargs)
                 else:
-                    func(data_k, label=label_k, color=color, **plot_kwargs)
+from .distributions import histplot, kdeplot
 
         self._add_axis_labels()
 
@@ -1626,7 +1627,6 @@ class PairGrid(Grid):
 
         if x_var == y_var:
             axes_vars = [x_var]
-        else:
             axes_vars = [x_var, y_var]
 
         hue_grouped = self.data.groupby(self.hue_vals, observed=True)

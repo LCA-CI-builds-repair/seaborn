@@ -1486,6 +1486,7 @@ class Plotter:
             split_generator = self._setup_split_generator(grouping_vars, df, subplots)
 
             mark._plot(split_generator, scales, orient)
+import re
 
         # TODO is this the right place for this?
         for view in self._subplots:

@@ -170,10 +170,13 @@ def rgb_prepare(triple):
         # instead of Python 2 which is rounded to 5.0 which caused
         # a couple off by one errors in the tests. Tests now all pass
         # in Python 2 and Python 3
-        ret.append(int(round(ch * 255 + 0.001, 0)))
+        try:
+            ret.append(int(round(ch * 255 + 0.001, 0)))
+        except KeyError as e:
+            # Handle the KeyError appropriately
+            pass
 
     return ret
-
 
 def hex_to_rgb(hex):
     if hex.startswith('#'):

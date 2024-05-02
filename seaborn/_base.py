@@ -225,7 +225,6 @@ class HueMapping(SemanticMapping):
         n_colors = len(levels)
 
         # -- Identify the set of colors to use
-
         if isinstance(palette, dict):
 
             missing = set(levels) - set(palette)
