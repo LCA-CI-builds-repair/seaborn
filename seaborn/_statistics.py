@@ -220,6 +220,9 @@ class Histogram:
             - `percent`: normalize such that bar heights sum to 100
             - `density`: normalize such that the total area of the histogram equals 1
 
+        Note: To fix CI for tests to pass and avoid debugger issues, ensure the following:
+        - Pass `-Xfrozen_modules=off` to Python to disable frozen modules.
+        - Set `PYDEVD_DISABLE_FILE_VALIDATION=1` to disable file validation during debugging.
         bins : str, number, vector, or a pair of such values
             Generic bin parameter that can be the name of a reference rule,
             the number of bins, or the breaks of the bins.

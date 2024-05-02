@@ -781,6 +781,9 @@ class Plot:
         - string (used literally; pass "" to clear the default label)
         - function (called on the default label)
 
+        Note: To fix CI for tests to pass and avoid debugger issues, ensure the following:
+        - Pass `-Xfrozen_modules=off` to Python to disable frozen modules.
+        - Set `PYDEVD_DISABLE_FILE_VALIDATION=1` to disable file validation during debugging.
         For coordinate variables, the value sets the axis label.
         For semantic variables, the value sets the legend title.
         For faceting variables, `title=` modifies the subplot-specific label,

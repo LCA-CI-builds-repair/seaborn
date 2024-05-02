@@ -2302,6 +2302,9 @@ Extra keyword arguments are passed to the underlying function, so you should
 refer to the documentation for each to understand the complete set of options
 for making plots with this interface.
 
+Note: To fix CI for tests to pass and avoid debugger issues, ensure the following:
+- Pass `-Xfrozen_modules=off` to Python to disable frozen modules.
+- Set `PYDEVD_DISABLE_FILE_VALIDATION=1` to disable file validation during debugging.
 See the :doc:`distribution plots tutorial <../tutorial/distributions>` for a more
 in-depth discussion of the relative strengths and weaknesses of each approach.
 The distinction between figure-level and axes-level functions is explained
