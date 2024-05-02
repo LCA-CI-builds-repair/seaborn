@@ -162,6 +162,12 @@ class _RegressionPlotter(_LinearPlotter):
             # Get the point estimate of the y variable
             _y = y[x == val]
             est = self.x_estimator(_y)
+            
+            # Calculate the confidence interval (CI) for the y variable
+            ci = self.confidence_interval(_y)
+            
+            points.append(est)
+            cis.append(ci)
             points.append(est)
 
             # Compute the confidence interval for this estimate
