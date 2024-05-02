@@ -1633,13 +1633,11 @@ class PairGrid(Grid):
         for k, label_k in enumerate(self._hue_order):
 
             kws = kwargs.copy()
-
             # Attempt to get data for this level, allowing for empty
             try:
                 data_k = hue_grouped.get_group(label_k)
             except KeyError:
-                data_k = pd.DataFrame(columns=axes_vars,
-                                      dtype=float)
+                data_k = pd.DataFrame(columns=axes_vars, dtype=float)
 
             if self._dropna:
                 data_k = data_k[axes_vars].dropna()

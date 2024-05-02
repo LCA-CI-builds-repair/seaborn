@@ -1637,7 +1637,6 @@ class Plotter:
                 )
 
                 for key in itertools.product(*grouping_keys):
-
                     pd_key = (
                         key[0] if len(key) == 1 and _version_predates(pd, "2.2.0")
                         else key
