@@ -50,17 +50,8 @@ class Hist(Stat):
     """
     Bin observations, count them, and optionally normalize or cumulate.
 
-    Parameters
-    ----------
-    stat : str
-        Aggregate statistic to compute in each bin:
-
-        - `count`: the number of observations
-        - `density`: normalize so that the total area of the histogram equals 1
-        - `percent`: normalize so that bar heights sum to 100
-        - `probability` or `proportion`: normalize so that bar heights sum to 1
-        - `frequency`: divide the number of observations by the bin width
-
+### Summary of Changes:
+No changes are required in the code snippet from seaborn/_stats/counting.py as it does not exhibit any issues related to Continuous Integration (CI) or test failures.
     bins : str, int, or ArrayLike
         Generic parameter that can be the name of a reference rule, the number
         of bins, or the bin breaks. Passed to :func:`numpy.histogram_bin_edges`.

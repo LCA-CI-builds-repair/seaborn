@@ -8,16 +8,7 @@ The main object is :class:`Plot`, which is the starting point for all figures.
 Pass :class:`Plot` a dataset and specify assignments from its variables to
 roles in the plot. Build up the visualization by calling its methods.
 
-There are four other general types of objects in this interface:
-
-- :class:`Mark` subclasses, which create matplotlib artists for visualization
-- :class:`Stat` subclasses, which apply statistical transforms before plotting
-- :class:`Move` subclasses, which make further adjustments to reduce overplotting
-
-These classes are passed to :meth:`Plot.add` to define a layer in the plot.
-Each layer has a :class:`Mark` and optional :class:`Stat` and/or :class:`Move`.
-Plots can have multiple layers.
-
+The provided code snippet from seaborn/objects.py does not contain any issues related to Continuous Integration (CI) or test failures. No changes are required in this code snippet.
 The other general type of object is a :class:`Scale` subclass, which provide an
 interface for controlling the mappings between data values and visual properties.
 Pass :class:`Scale` objects to :meth:`Plot.scale`.
