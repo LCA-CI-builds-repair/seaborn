@@ -81,7 +81,6 @@ class _BaseGrid:
         positional argument. Additional arguments are passed through.
         The return value of `func` becomes the return value of this method.
         See the `apply` method if you want to return self instead.
-
         Added in v0.12.0.
 
         """

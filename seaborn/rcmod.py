@@ -341,14 +341,13 @@ def plotting_context(context=None, font_scale=1, rc=None):
     matplotlib rcParams system.
 
     The base context is "notebook", and the other contexts are "paper", "talk",
-    and "poster", which are version of the notebook parameters scaled by different
+    and "poster", which are versions of the notebook parameters scaled by different
     values. Font elements can also be scaled independently of (but relative to)
     the other values.
 
     This function can also be used as a context manager to temporarily
     alter the global defaults. See :func:`set_theme` or :func:`set_context`
     to modify the global defaults for all plots.
-
     Parameters
     ----------
     context : None, dict, or one of {paper, notebook, talk, poster}

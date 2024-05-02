@@ -265,12 +265,12 @@ class PlotData:
         frame = pd.DataFrame(plot_data)
 
         return frame, names, ids
-
-
 def handle_data_source(data: object) -> pd.DataFrame | Mapping | None:
     """Convert the data source object to a common union representation."""
     if isinstance(data, pd.DataFrame) or hasattr(data, "__dataframe__"):
         # Check for pd.DataFrame inheritance could be removed once
+        # minimal pandas version supports dataframe interchange (1.5.0).
+        data = convert_dataframe_to_pandas(data)
         # minimal pandas version supports dataframe interchange (1.5.0).
         data = convert_dataframe_to_pandas(data)
     elif data is not None and not isinstance(data, Mapping):
@@ -278,8 +278,6 @@ def handle_data_source(data: object) -> pd.DataFrame | Mapping | None:
         raise TypeError(err)
 
     return data
-
-
 def convert_dataframe_to_pandas(data: object) -> pd.DataFrame:
     """Use the DataFrame exchange protocol, or fail gracefully."""
     if isinstance(data, pd.DataFrame):
