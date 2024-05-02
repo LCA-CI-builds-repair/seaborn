@@ -165,7 +165,6 @@ def _get_win_folder_with_pywin32(csidl_name):
         for c in dir:
             if ord(c) > 255:
                 has_high_char = True
-                break
         if has_high_char:
             try:
                 import win32api
