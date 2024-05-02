@@ -122,7 +122,6 @@ def test_bootstrap_arglength():
 def test_bootstrap_string_func():
     """Test that named numpy methods are the same as the numpy function."""
     x = np.random.randn(100)
-
     res_a = algo.bootstrap(x, func="mean", seed=0)
     res_b = algo.bootstrap(x, func=np.mean, seed=0)
     assert np.array_equal(res_a, res_b)

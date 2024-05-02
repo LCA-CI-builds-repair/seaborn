@@ -1345,7 +1345,6 @@ class TestVectorPlotter:
 
         # This fixture holds the logic for parameterizing
         # the following test (test_comp_data_missing)
-
         NA, var_type = request.param
 
         comp_data = [0, 1, np.nan, 2, np.nan, 1]

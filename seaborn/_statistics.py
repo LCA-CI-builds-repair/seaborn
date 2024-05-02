@@ -314,6 +314,7 @@ class Histogram:
                     pass
                 elif not isinstance(binrange[0], Number):
                     binrange = binrange[i]
+                    binrange = binrange[i]
 
                 discrete = self.discrete
                 if not isinstance(discrete, bool):

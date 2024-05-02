@@ -934,6 +934,7 @@ class ClusterGrid(Grid):
 
         Returns
         -------
+        description of the returned value
         matrix : numpy.array
             A numpy array of integer values, where each indexes into the cmap
         cmap : matplotlib.colors.ListedColormap

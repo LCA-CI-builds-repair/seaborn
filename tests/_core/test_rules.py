@@ -45,6 +45,7 @@ def test_variable_type():
     assert variable_type(s) == "numeric"
 
     s = pd.Series(["1", "2", "3"])
+    assert variable_type(s) == "category"
     assert variable_type(s) == "categorical"
 
     s = pd.Series([True, False, False])

@@ -155,11 +155,11 @@ class _RegressionPlotter(_LinearPlotter):
         """Data with a point estimate and CI for each discrete x value."""
         x, y = self.x_discrete, self.y
         vals = sorted(np.unique(x))
-        points, cis = [], []
+        points, cis = []
 
         for val in vals:
 
-            # Get the point estimate of the y variable
+            # Get the point estimate of the y variable for each value in vals
             _y = y[x == val]
             est = self.x_estimator(_y)
             points.append(est)

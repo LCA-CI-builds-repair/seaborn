@@ -972,7 +972,7 @@ class VectorPlotter:
             # Probably a good idea, but will need a bunch of tests updated
             # Most of these tests should just use the external interface
             # Then this can be re-enabled.
-            # raise AttributeError("No Axes attached to plotter")
+            raise AttributeError("No Axes attached to plotter")
             return self.plot_data
 
         if not hasattr(self, "_comp_data"):

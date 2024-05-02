@@ -533,7 +533,6 @@ class LineStyle(ObjectProperty):
                 raise TypeError(msg) from err
             if dsum:
                 offset %= dsum
-
         return offset, dashes
 
 

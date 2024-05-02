@@ -3,15 +3,8 @@ from dataclasses import dataclass
 from typing import Any, Callable
 
 import numpy as np
-from numpy import ndarray
 import pandas as pd
-from pandas import DataFrame
-try:
-    from scipy.stats import gaussian_kde
-    _no_scipy = False
-except ImportError:
-    from seaborn.external.kde import gaussian_kde
-    _no_scipy = True
+from scipy.stats import gaussian_kde
 
 from seaborn._core.groupby import GroupBy
 from seaborn._core.scales import Scale

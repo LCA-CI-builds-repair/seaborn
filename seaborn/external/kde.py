@@ -70,13 +70,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # -------------------------------------------------------------------------------
 
 import numpy as np
-from numpy import (asarray, atleast_2d, reshape, zeros, newaxis, dot, exp, pi,
-                   sqrt, power, atleast_1d, sum, ones, cov)
+from numpy import asarray, atleast_2d, reshape, zeros, newaxis, dot, exp, pi, sqrt, power, atleast_1d, sum, ones, cov
 from numpy import linalg
 
-
 __all__ = ['gaussian_kde']
-
 
 class gaussian_kde:
     """Representation of a kernel-density estimate using Gaussian kernels.

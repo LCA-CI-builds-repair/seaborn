@@ -167,7 +167,7 @@ def rgb_prepare(triple):
             ch = 1
 
         # Fix for Python 3 which by default rounds 4.5 down to 4.0
-        # instead of Python 2 which is rounded to 5.0 which caused
+        # instead of Python 2 which is rounded to 5.0 which caused issues
         # a couple off by one errors in the tests. Tests now all pass
         # in Python 2 and Python 3
         ret.append(int(round(ch * 255 + 0.001, 0)))
