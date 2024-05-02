@@ -634,42 +634,41 @@ class _DistributionPlotter(VectorPlotter):
 
                 # Add in the density curves
 
-                try:
-                    density = densities[key]
-                except KeyError:
-                    continue
-                support = density.index
+try:
+    density = densities[key]
+except KeyError:
+    continue
+support = density.index
 
-                if "x" in self.variables:
-                    line_args = support, density
-                    sticky_x, sticky_y = None, (0, np.inf)
-                else:
-                    line_args = density, support
-                    sticky_x, sticky_y = (0, np.inf), None
+if "x" in self.variables:
+    line_args = support, density
+    sticky_x, sticky_y = None, (0, np.inf)
+else:
+    line_args = density, support
+    sticky_x, sticky_y = (0, np.inf), None
 
-                line_kws["color"] = to_rgba(sub_color, 1)
+line_kws["color"] = to_rgba(sub_color, 1)
                 line, = ax.plot(
                     *line_args, **line_kws,
                 )
+if sticky_x is not None:
+    line.sticky_edges.x[:] = sticky_x
+if sticky_y is not None:
+    line.sticky_edges.y[:] = sticky_y
 
-                if sticky_x is not None:
-                    line.sticky_edges.x[:] = sticky_x
-                if sticky_y is not None:
-                    line.sticky_edges.y[:] = sticky_y
-
-        if element == "bars" and "linewidth" not in plot_kws:
+if element == "bars" and "linewidth" not in plot_kws:
 
             # Now we handle linewidth, which depends on the scaling of the plot
 
             # We will base everything on the minimum bin width
             hist_metadata = pd.concat([
-                # Use .items for generality over dict or df
-                h.index.to_frame() for _, h in histograms.items()
-            ]).reset_index(drop=True)
-            thin_bar_idx = hist_metadata["widths"].idxmin()
-            binwidth = hist_metadata.loc[thin_bar_idx, "widths"]
-            left_edge = hist_metadata.loc[thin_bar_idx, "edges"]
-
+hist_metadata = pd.concat([
+    # Use .items for generality over dict or df
+    h.index.to_frame() for _, h in histograms.items()
+]).reset_index(drop=True)
+thin_bar_idx = hist_metadata["widths"].idxmin()
+binwidth = hist_metadata.loc[thin_bar_idx, "widths"]
+left_edge = hist_metadata.loc[thin_bar_idx, "edges"]
             # Set initial value
             default_linewidth = math.inf
 
@@ -715,13 +714,12 @@ class _DistributionPlotter(VectorPlotter):
 
         # --- Finalize the plot ----
 
-        # Axis labels
-        ax = self.ax if self.ax is not None else self.facets.axes.flat[0]
-        default_x = default_y = ""
-        if self.data_variable == "x":
-            default_y = estimator.stat.capitalize()
-        if self.data_variable == "y":
-            default_x = estimator.stat.capitalize()
+# Axis labels
+ax = self.ax if self.ax is not None else self.facets.axes.flat[0]
+default_x = default_y = ""
+if self.data_variable == "x":
+    default_y = estimator.stat.capitalize()
+if self.data_variable == "y":
         self._add_axis_labels(ax, default_x, default_y)
 
         # Legend for semantic variables
@@ -742,13 +740,14 @@ class _DistributionPlotter(VectorPlotter):
         common_bins, common_norm,
         thresh, pthresh, pmax,
         color, legend,
-        cbar, cbar_ax, cbar_kws,
-        estimate_kws,
-        **plot_kws,
-    ):
-
-        # Default keyword dicts
-        cbar_kws = {} if cbar_kws is None else cbar_kws.copy()
+def plot_bivariate_histogram(
+    common_bins, common_norm,
+    thresh, pthresh, pmax,
+    color, legend,
+    cbar, cbar_ax, cbar_kws,
+    estimate_kws,
+    **plot_kws
+):
 
         # Now initialize the Histogram estimator
         estimator = Histogram(**estimate_kws)

@@ -153,7 +153,6 @@ class TestContinuous:
         for n in [2, 5, 10]:
             a = self.setup_ticks(x, upto=n)
             assert len(a.major.locator()) <= (n + 1)
-
     def test_tick_every(self, x):
 
         for d in [.05, .2, .5]:
