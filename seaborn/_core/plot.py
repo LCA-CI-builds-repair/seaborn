@@ -1430,13 +1430,17 @@ class Plotter:
             orient = layer["orient"] or mark._infer_orient(scales)
 
             def get_order(var):
-                # Ignore order for x/y: they have been scaled to numeric indices,
-                # so any original order is no longer valid. Default ordering rules
-                # sorted unique numbers will correctly reconstruct intended order
-                # TODO This is tricky, make sure we add some tests for this
-                if var not in "xy" and var in scales:
-                    return getattr(scales[var], "order", None)
-
+                try:
+                    # Ignore order for x/y: they have been scaled to numeric indices,
+                    # so any original order is no longer valid. Default ordering rules
+                    # sorted unique numbers will correctly reconstruct intended order
+                    # TODO This is tricky, make sure we add some tests for this
+                    if var not in "xy" and var in scales:
+                        return getattr(scales[var], "order", None)
+                
+                except KeyError as e:
+                    print(f"KeyError occurred: {e}")
+                    # Handle KeyError 'ME' appropriately
             if orient in df:
                 width = pd.Series(index=df.index, dtype=float)
                 for view in subplots:
