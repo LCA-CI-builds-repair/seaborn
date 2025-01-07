@@ -252,6 +252,13 @@ class PlotConfig:
 class Plot:
     """
     An interface for declaratively specifying statistical graphics.
+    ...
+
+    Notes
+    -----
+    If you encounter the error message:
+
+    
 
     Plots are constructed by initializing this class and adding one or more
     layers, comprising a `Mark` and optional `Stat` or `Move`.  Additionally,
