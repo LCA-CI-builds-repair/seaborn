@@ -96,6 +96,7 @@ def theme_context(params: dict[str, Any]) -> Generator:
     # TODO how to allow this to reflect the color cycle when relevant?
     try:
         mpl.rcParams.update(params)
+        check_pandoc_version()
         for (code, color) in zip(color_codes, nice_colors):
             mpl.colors.colorConverter.colors[code] = color
         yield
