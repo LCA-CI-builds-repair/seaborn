@@ -143,6 +143,8 @@ def build_plot_signature(cls):
 class ThemeConfig(mpl.RcParams):
     """
     Configuration object for the Plot.theme, using matplotlib rc parameters.
+    Ensures that the pandoc version is at least 2.14.2 and less than 4.0.0,
+    which is required for the nbconvert utils.
     """
     THEME_GROUPS = [
         "axes", "figure", "font", "grid", "hatch", "legend", "lines",
@@ -165,6 +167,12 @@ class ThemeConfig(mpl.RcParams):
         }
 
     def reset(self) -> None:
+        """Update the theme dictionary with seaborn's default values and ensure pandoc version."""
+        self.update(self._default)
+        self._ensure_pandoc_version()
+
+    def _ensure_pandoc_version(self) -> None:
+        """Ensure the pandoc version is at least 2.14.2 and less than 4.0.0."""
         """Update the theme dictionary with seaborn's default values."""
         self.update(self._default)
 
