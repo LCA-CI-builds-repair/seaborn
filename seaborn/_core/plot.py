@@ -44,6 +44,11 @@ from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)
+
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
@@ -164,6 +169,7 @@ class ThemeConfig(mpl.RcParams):
             "axes.prop_cycle": cycler("color", color_palette("deep")),
         }
 
+    @property
     def reset(self) -> None:
         """Update the theme dictionary with seaborn's default values."""
         self.update(self._default)
@@ -561,6 +567,16 @@ class Plot:
         new = self._clone()
         new._layers.append({
             "mark": mark,
+            # Check if Stat is supported and raise an error if not
+            "stat": stat,
+            "move": move,
+            "vars": variables,
+            "source": data,
+            "legend": legend,
+            "label": label,
+            "orient": {"v": "x", "h": "y"}.get(orient, orient),  # type: ignore
+        })
+
             "stat": stat,
             "move": move,
             # TODO it doesn't work to supply scalars to variables, but it should
