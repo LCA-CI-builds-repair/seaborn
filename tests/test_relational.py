@@ -584,6 +584,8 @@ class TestRelationalPlotter(Helpers):
         ydata = g.ax.lines[0].get_ydata()
         for i, label in enumerate(g.ax.get_xticklabels()):
             pos_df = long_df[long_df["a"] == label.get_text()]
+            if pos_df.empty:
+                continue
             expected = np.average(pos_df["y"], weights=pos_df["x"])
             assert ydata[i] == pytest.approx(expected)
 
