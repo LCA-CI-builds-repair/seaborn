@@ -651,6 +651,19 @@ class TestRelationalPlotter(Helpers):
         for ax in g.axes[:, 1:].flat:
             assert ax.get_ylabel() == ""
 
+    def test_relplot_weights_coercion(self, long_df):
+        # Test weights coercion to numeric
+        long_df['x_str'] = long_df['x'].astype(str)
+
+        g = relplot(data=long_df, x="a", y="y", weights="x_str", kind="line")
+        ydata = g.ax.lines[0].get_ydata()
+
+        for i, label in enumerate(g.ax.get_xticklabels()):
+            pos_df = long_df[long_df["a"] == label.get_text()]
+            # x_str should be coerced back to numeric for the weighted average
+            expected = np.average(pos_df["y"], weights=pos_df["x_str"].astype(float))
+            assert ydata[i] == pytest.approx(expected)
+
     def test_relplot_data(self, long_df):
 
         g = relplot(
