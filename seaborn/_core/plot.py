@@ -697,6 +697,39 @@ class Plot:
 
         return new
 
+    def theme(self, **theme_params) -> Plot:
+        """
+        Set aesthetic parameters for the plot.
+
+        This method can be used to set default parameters affecting the appearance
+        of all plot elements or only specific subsets of elements, using keywords
+        to define specific namespaces.
+
+        This method combines well with the :meth:`Plot.configure` method to customize
+        the default appearance of plots:
+
+        >>> p = Plot(x=[1, 2, 3], y=[4, 5, 2]).theme(marker="s", color=".4")
+        >>> p.configure(figsize=(6, 6)).add(Scatter())
+
+        Parameters
+        ----------
+        theme_params : keywords
+            Default aesthetic parameters, such as those in :data:`Plot.config.theme`.
+
+        Returns
+        -------
+        Plot
+            Returns the object.
+
+        See Also
+        --------
+        Plot.configure : Further configure a specific plot for rendering.
+
+        """
+        new = self._clone()
+        new._theme.update(**theme_params)
+        return new
+
     # TODO def twin()?
 
     def scale(self, **scales: Scale) -> Plot:
