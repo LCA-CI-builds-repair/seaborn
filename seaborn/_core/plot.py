@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import io
 import os
+import warnings
 import re
 import inspect
 import itertools
@@ -33,6 +34,7 @@ from seaborn._core.groupby import GroupBy
 from seaborn._core.properties import PROPERTIES, Property
 from seaborn._core.typing import (
     DataSource,
+    VariablesList,
     VariableSpec,
     VariableSpecList,
     OrderSpec,
@@ -51,6 +53,13 @@ if TYPE_CHECKING:
 
 default = Default()
 
+# Ignore pandoc version warning
+warnings.filterwarnings(
+    "ignore",
+    category=RuntimeWarning,
+    module="nbconvert.utils.pandoc",
+    message="you are using an unsupported version of pandoc.*"
+)
 
 # ---- Definitions for internal specs ---------------------------------------------- #
 
@@ -661,7 +670,7 @@ class Plot:
         --------
         .. include:: ../docstrings/objects.Plot.facet.rst
 
-        """
+        """ 
         variables: dict[str, VariableSpec] = {}
         if col is not None:
             variables["col"] = col
