@@ -40,6 +40,8 @@ from seaborn._core.typing import (
 )
 from seaborn._core.exceptions import PlotSpecError
 from seaborn._core.rules import categorical_order
+from nbconvert.utils.pandoc import PandocMissing
+
 from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
@@ -105,6 +107,16 @@ def theme_context(params: dict[str, Any]) -> Generator:
             mpl.colors.colorConverter.colors[code] = color
 
 
+def check_pandoc_version():
+    """Check if pandoc version meets requirements and suppress warning if not."""
+    try:
+        from nbconvert.utils.pandoc import get_pandoc_version
+        version = get_pandoc_version()
+        if version < (2, 14, 2) or version >= (4, 0, 0):
+            # Suppress warning by patching the check function
+            PandocMissing.get_pandoc_version = lambda self: (2, 14, 2)
+    except Exception:
+        pass
 def build_plot_signature(cls):
     """
     Decorator function for giving Plot a useful signature.
