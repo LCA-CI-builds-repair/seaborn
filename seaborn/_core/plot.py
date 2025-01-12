@@ -30,6 +30,8 @@ from seaborn._core.moves import Move
 from seaborn._core.scales import Scale
 from seaborn._core.subplots import Subplots
 from seaborn._core.groupby import GroupBy
+from seaborn.external.version import Version
+PANDOC_VERSION = Version("2.14.2")
 from seaborn._core.properties import PROPERTIES, Property
 from seaborn._core.typing import (
     DataSource,
