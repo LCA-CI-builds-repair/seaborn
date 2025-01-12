@@ -784,7 +784,21 @@ class Plot:
         For coordinate variables, the value sets the axis label.
         For semantic variables, the value sets the legend title.
         For faceting variables, `title=` modifies the subplot-specific label,
-        while `col=` and/or `row=` add a label for the faceting variable.
+        while `col=` and `row=` set the overall facet dimension titles.
+
+        Parameters
+        ----------
+        title : str or None
+            Title for the overall plot or current subplot.
+        legend : str or None
+            Title for the legend.
+        **variables : str or callable
+            Additional variable-specific labels.
+
+        Examples
+        --------
+        .. include:: ../docstrings/objects.Plot.label.rst
+        """=` and/or `row=` add a label for the faceting variable.
 
         When using a single subplot, `title=` sets its title.
 
