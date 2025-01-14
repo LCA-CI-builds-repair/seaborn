@@ -200,9 +200,8 @@ class ThemeConfig(mpl.RcParams):
             "<div style='border-style: inset; border-width: 2px'>",
             *self._html_table(self),
             "</div>",
-            "</div>",
         ]
-        return "\n".join(repr)
+        return "".join(repr)
 
 
 class DisplayConfig(TypedDict):
