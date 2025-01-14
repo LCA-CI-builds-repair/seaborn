@@ -15,6 +15,7 @@ from xml.etree import ElementTree
 
 from cycler import cycler
 import pandas as pd
+import warnings
 from pandas import DataFrame, Series, Index
 import matplotlib as mpl
 from matplotlib.axes import Axes
@@ -48,6 +49,10 @@ from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
 
+
+# Suppress Pandoc version warning during documentation build
+warnings.filterwarnings('ignore', 
+    message='You are using an unsupported version of Pandoc.*')
 
 default = Default()
 
