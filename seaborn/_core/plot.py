@@ -181,6 +181,7 @@ class ThemeConfig(mpl.RcParams):
         """Restruct to thematic rc params."""
         return {
             k: v for k, v in params.items()
+            if k not in ("pandoc",)
             if any(k.startswith(p) for p in self.THEME_GROUPS)
         }
 
