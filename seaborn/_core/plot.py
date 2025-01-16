@@ -44,6 +44,23 @@ from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
+def enforce_pandoc_version():
+    """
+    Enforce that the correct version of Pandoc is installed.
+
+    Ensures the version is at least 2.14.2 and less than 4.0.0.
+    Exits with a message if the requirement is not met.
+    """
+    try:
+        pandoc_utils.check_pandoc_version()
+    except RuntimeWarning as e:
+        raise RuntimeError(
+            "Unsupported Pandoc version detected. "
+            "Ensure that Pandoc is >=2.14.2 and <4.0.0. "
+            "Follow installation instructions at https://pandoc.org/installing.html."
+        ) from e
+
+
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
