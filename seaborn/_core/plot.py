@@ -45,6 +45,11 @@ from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
 from typing import TYPE_CHECKING, TypedDict
+
+# Define required pandoc version range
+PANDOC_VERSION_MIN = (2, 9, 2, 1)  # Update minimum to match current CI environment
+PANDOC_VERSION_MAX = (4, 0, 0)
+
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
 
