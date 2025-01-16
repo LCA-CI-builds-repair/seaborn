@@ -16,6 +16,7 @@ from xml.etree import ElementTree
 from cycler import cycler
 import pandas as pd
 from pandas import DataFrame, Series, Index
+from packaging.version import Version, parse
 import matplotlib as mpl
 from matplotlib.axes import Axes
 from matplotlib.artist import Artist
@@ -389,6 +390,15 @@ class Plot:
 
         if Plot.config.display["format"] != "svg":
             return None
+        
+        # Check pandoc version before proceeding with document conversion
+        if not _check_pandoc_version():
+            import warnings
+            warnings.warn(
+                "Pandoc version not compatible. Documentation conversion may be affected.",
+                RuntimeWarning
+            )
+            
         return self.plot()._repr_svg_()
 
     def _clone(self) -> Plot:
