@@ -584,7 +584,10 @@ class TestRelationalPlotter(Helpers):
         ydata = g.ax.lines[0].get_ydata()
         for i, label in enumerate(g.ax.get_xticklabels()):
             pos_df = long_df[long_df["a"] == label.get_text()]
+            if len(pos_df) > 0:
             expected = np.average(pos_df["y"], weights=pos_df["x"])
+        else:
+            expected = np.nan
             assert ydata[i] == pytest.approx(expected)
 
     def test_relplot_stringy_numerics(self, long_df):
