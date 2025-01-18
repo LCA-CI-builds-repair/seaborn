@@ -44,10 +44,16 @@ from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
+# Import pandoc version check function to customize
+from nbconvert.utils.pandoc import get_pandoc_version, _min_version, _max_version
+
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
 
+# Override nbconvert's pandoc version requirements to accept 2.9.2
+_min_version = (2, 9, 0)  # Was (2, 14, 2)
+_max_version = (4, 0, 0)  # Unchanged
 
 default = Default()
 
