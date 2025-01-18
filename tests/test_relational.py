@@ -1071,9 +1071,12 @@ class TestLinePlotter(SharedAxesLevelTests, Helpers):
     def test_weights(self, long_df):
 
         ax = lineplot(long_df, x="a", y="y", weights="x")
-        vals = ax.lines[0].get_ydata()
+        ydata = ax.lines[0].get_ydata()
         for i, label in enumerate(ax.get_xticklabels()):
             pos_df = long_df.loc[long_df["a"] == label.get_text()]
+            if len(pos_df) == 0:
+                continue
+            assert ydata[i] == pytest.approx(expected)
             expected = np.average(pos_df["y"], weights=pos_df["x"])
             assert vals[i] == pytest.approx(expected)
 
