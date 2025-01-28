@@ -23,6 +23,7 @@ from matplotlib.figure import Figure
 import numpy as np
 from PIL import Image
 
+from packaging import version
 from seaborn._marks.base import Mark
 from seaborn._stats.base import Stat
 from seaborn._core.data import PlotData
@@ -44,6 +45,9 @@ from seaborn._compat import set_layout_engine
 from seaborn.rcmod import axes_style, plotting_context
 from seaborn.palettes import color_palette
 
+# Version bounds for pandoc compatibility
+MIN_PANDOC_VERSION = "2.14.2"
+MAX_PANDOC_VERSION = "4.0.0"
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
     from matplotlib.figure import SubFigure
@@ -1829,4 +1833,23 @@ class Plotter:
                 except TypeError:
                     # Should we warn / raise? Note that we don't expect to get here
                     # under any normal circumstances.
-                    pass
+                pass
+    
+    def _check_pandoc_version(self):
+        """
+        Check if installed pandoc version is compatible.
+        Returns True if compatible, False if not.
+        """
+        try:
+            import pypandoc
+            pandoc_version = pypandoc.get_pandoc_version()
+            if isinstance(pandoc_version, bytes):
+                pandoc_version = pandoc_version.decode('utf-8')
+                
+            return (
+                version.parse(MIN_PANDOC_VERSION) <= version.parse(pandoc_version)
+                and version.parse(pandoc_version) < version.parse(MAX_PANDOC_VERSION)
+            )
+        except (ImportError, OSError):
+            # Return False if pandoc not installed or version check fails
+            return False
