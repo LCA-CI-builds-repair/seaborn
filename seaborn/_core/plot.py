@@ -1363,9 +1363,11 @@ class Plotter:
                 scale._priority = 0  # type: ignore
 
             if axis is None:
-                # We could think about having a broader concept of (un)shared properties
-                # In general, not something you want to do (different scales in facets)
-                # But could make sense e.g. with paired plots. Build later.
+                share_state = None
+                # TODO consider a broader concept of (un)shared properties.
+                #  In general, different scales for non-axis semantics in facets 
+                #  is not something we want. But it could make sense in some cases,
+                #  e.g. with paired plots. Revisit this later.
                 share_state = None
                 subplots = []
             else:
