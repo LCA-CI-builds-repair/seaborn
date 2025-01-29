@@ -13,6 +13,7 @@ from collections.abc import Callable, Generator
 from typing import Any, List, Literal, Optional, cast
 from xml.etree import ElementTree
 
+from packaging import version
 from cycler import cycler
 import pandas as pd
 from pandas import DataFrame, Series, Index
@@ -51,6 +52,34 @@ if TYPE_CHECKING:
 
 default = Default()
 
+
+def check_pandoc_version():
+    """
+    Check if installed pandoc version meets requirements.
+    
+    Returns
+    -------
+    bool
+        True if pandoc version is compatible, False otherwise
+    str
+        Error message if version is incompatible, empty string otherwise
+    """
+    try:
+        import nbconvert.utils.pandoc as nbp
+        pandoc_version = nbp.get_pandoc_version()
+        
+        min_version = version.parse("2.14.2")
+        max_version = version.parse("4.0.0")
+        current = version.parse(str(pandoc_version))
+        
+        if current < min_version or current >= max_version:
+            msg = (f"Incompatible pandoc version {pandoc_version}. "
+                  f"Version must be at least {min_version} but less than {max_version}. "
+                  f"See https://pandoc.org/installing.html")
+            return False, msg
+    except Exception as e:
+        return False, f"Error checking pandoc version: {str(e)}"
+    return True, ""
 
 # ---- Definitions for internal specs ---------------------------------------------- #
 
@@ -933,6 +962,12 @@ class Plot:
         """
         Compile the plot spec and return the Plotter object.
         """
+        # Check pandoc version before proceeding
+        is_valid, err_msg = check_pandoc_version()
+        if not is_valid:
+            import warnings
+            warnings.warn(err_msg, RuntimeWarning)
+            
         with theme_context(self._theme_with_defaults()):
             return self._plot(pyplot)
 
