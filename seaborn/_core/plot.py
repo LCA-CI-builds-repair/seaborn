@@ -16,6 +16,7 @@ from xml.etree import ElementTree
 from cycler import cycler
 import pandas as pd
 from pandas import DataFrame, Series, Index
+import warnings
 import matplotlib as mpl
 from matplotlib.axes import Axes
 from matplotlib.artist import Artist
@@ -51,6 +52,33 @@ if TYPE_CHECKING:
 
 default = Default()
 
+
+def check_pandoc_version():
+    """
+    Check if installed pandoc version meets requirements.
+    Warns rather than fails if version is unsupported.
+    """
+    try:
+        from nbconvert.utils.pandoc import get_pandoc_version, PandocMissing
+        
+        try:
+            pandoc_version = get_pandoc_version()
+            min_version = (2, 14, 2)
+            max_version = (4, 0, 0) 
+            
+            if not (min_version <= pandoc_version < max_version):
+                warnings.warn(
+                    f"You are using an unsupported version of pandoc ({'.'.join(map(str, pandoc_version))}).\n"
+                    f"Your version must be at least {'.'.join(map(str, min_version))} "
+                    f"but less than {'.'.join(map(str, max_version))}.\n"
+                    "Refer to https://pandoc.org/installing.html.\n"
+                    "Continuing with doubts...",
+                    RuntimeWarning
+                )
+        except PandocMissing:
+            warnings.warn("Pandoc not found. Some features may not work correctly.", RuntimeWarning)
+    except ImportError:
+        warnings.warn("nbconvert not installed. Some features may not work correctly.", RuntimeWarning)
 
 # ---- Definitions for internal specs ---------------------------------------------- #
 
@@ -1038,6 +1066,9 @@ class Plotter:
         if Plot.config.display["format"] != "png":
             return None
 
+        # Check pandoc version before proceeding
+        check_pandoc_version()
+
         buffer = io.BytesIO()
 
         factor = 2 if Plot.config.display["hidpi"] else 1
@@ -1056,6 +1087,9 @@ class Plotter:
 
         if Plot.config.display["format"] != "svg":
             return None
+
+        # Check pandoc version before proceeding  
+        check_pandoc_version()
 
         # TODO DPI for rasterized artists?
 
