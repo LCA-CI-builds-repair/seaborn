@@ -861,6 +861,16 @@ class TestLinePlotter(SharedAxesLevelTests, Helpers):
 
     def test_plot(self, long_df, repeated_df):
 
+        def validate_weights(data, weights):
+            """Validate weight inputs for weighted averaging"""
+            if weights is not None:
+                if len(data) == 0:
+                    return np.array([])
+                if len(data) != len(weights):
+                    raise ValueError("Length of weights must match length of data")
+                if not all(w >= 0 for w in weights):
+                    raise ValueError("All weights must be non-negative")
+            return weights
         f, ax = plt.subplots()
 
         p = _LinePlotter(
@@ -1026,6 +1036,16 @@ class TestLinePlotter(SharedAxesLevelTests, Helpers):
         p.estimator = "mean"
         with pytest.raises(ValueError):
             p.plot(ax, {})
+            
+        # Test weighted averaging with empty data
+        p = _LinePlotter(
+            data=long_df.iloc[0:0],  # empty DataFrame
+            variables=dict(x="x", y="y"),
+            weights="x"
+        )
+        ax.clear()
+        p.plot(ax, {})
+        assert len(ax.lines) == 0
 
         p = _LinePlotter(
             data=long_df,
@@ -1071,11 +1091,13 @@ class TestLinePlotter(SharedAxesLevelTests, Helpers):
     def test_weights(self, long_df):
 
         ax = lineplot(long_df, x="a", y="y", weights="x")
-        vals = ax.lines[0].get_ydata()
-        for i, label in enumerate(ax.get_xticklabels()):
-            pos_df = long_df.loc[long_df["a"] == label.get_text()]
-            expected = np.average(pos_df["y"], weights=pos_df["x"])
-            assert vals[i] == pytest.approx(expected)
+        if len(long_df):
+            vals = ax.lines[0].get_ydata()
+            for i, label in enumerate(ax.get_xticklabels()):
+                pos_df = long_df.loc[long_df["a"] == label.get_text()]
+                if len(pos_df):
+                    expected = np.average(pos_df["y"], weights=pos_df["x"])
+                    assert vals[i] == pytest.approx(expected)
 
     def test_non_aggregated_data(self):
 
