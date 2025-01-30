@@ -46,7 +46,7 @@ from seaborn.palettes import color_palette
 
 from typing import TYPE_CHECKING, TypedDict
 if TYPE_CHECKING:
-    from matplotlib.figure import SubFigure
+    from matplotlib._figure import Figure as SubFigure
 
 
 default = Default()
