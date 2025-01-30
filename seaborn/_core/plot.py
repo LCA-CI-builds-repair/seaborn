@@ -72,15 +72,15 @@ class FacetSpec(TypedDict, total=False):
 
     variables: dict[str, VariableSpec]
     structure: dict[str, list[str]]
-    wrap: int | None
+    wrap: int | None = None
 
 
 class PairSpec(TypedDict, total=False):
 
     variables: dict[str, VariableSpec]
     structure: dict[str, list[str]]
-    cross: bool
-    wrap: int | None
+    cross: bool = True
+    wrap: int | None = None
 
 
 # --- Local helpers ---------------------------------------------------------------- #
