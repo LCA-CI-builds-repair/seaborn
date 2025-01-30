@@ -1,5 +1,6 @@
 """The classes for specifying and compiling a declarative visualization."""
 from __future__ import annotations
+import warnings
 
 import io
 import os
@@ -1193,6 +1194,11 @@ class Plotter:
                     title_parts.append(val)
 
             has_col = sub["col"] is not None
+
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=RuntimeWarning, 
+                                        message="you are using an unsupported version of pandoc")
+                
             has_row = sub["row"] is not None
             show_title = (
                 has_col and has_row
