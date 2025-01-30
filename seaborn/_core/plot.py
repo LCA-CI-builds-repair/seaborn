@@ -51,6 +51,15 @@ if TYPE_CHECKING:
 
 default = Default()
 
+# Suppress pandoc version warning
+warnings.filterwarnings(
+    "ignore",
+    message=(
+        "You are using an unsupported version of pandoc.*"
+        "Refer to https://pandoc.org/installing.html."
+    )
+)
+
 
 # ---- Definitions for internal specs ---------------------------------------------- #
 
