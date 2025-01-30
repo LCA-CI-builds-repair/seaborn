@@ -20,6 +20,7 @@ import matplotlib as mpl
 from matplotlib.axes import Axes
 from matplotlib.artist import Artist
 from matplotlib.figure import Figure
+from matplotlib._layoutengine import LayoutEngine
 import numpy as np
 from PIL import Image
 
