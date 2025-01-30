@@ -8,6 +8,7 @@ import inspect
 import itertools
 import textwrap
 from contextlib import contextmanager
+from packaging.version import Version
 from collections import abc
 from collections.abc import Callable, Generator
 from typing import Any, List, Literal, Optional, cast
@@ -50,6 +51,33 @@ if TYPE_CHECKING:
 
 
 default = Default()
+
+def check_pandoc_version():
+    """Check if pandoc version is compatible, raise warning if not."""
+    try:
+        import nbconvert
+    except ImportError:
+        return
+
+    pandoc_min_version = Version("2.14.2")
+    pandoc_max_version = Version("4.0")
+
+    try:
+        pandoc_version = nbconvert.utils.pandoc.get_pandoc_version()
+    except Exception:
+        return
+
+    pandoc_version = Version(pandoc_version)
+    if not (pandoc_min_version <= pandoc_version < pandoc_max_version):
+        import warnings
+        warnings.warn(
+            f"You are using an unsupported version of pandoc ({pandoc_version}). "
+            f"Your version must be at least ({pandoc_min_version}) but less than ({pandoc_max_version}). "
+            "Refer to https://pandoc.org/installing.html.",
+            RuntimeWarning
+        )
+        
+check_pandoc_version()
 
 
 # ---- Definitions for internal specs ---------------------------------------------- #
